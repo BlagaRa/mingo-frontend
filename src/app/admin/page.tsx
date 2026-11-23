@@ -1,4 +1,4 @@
-import { ActivityList } from "@/components/crm/activity-list";
+﻿import { ActivityList } from "@/components/crm/activity-list";
 import { BarChart } from "@/components/crm/bar-chart";
 import { KpiCard } from "@/components/crm/kpi-card";
 import { TrendChart } from "@/components/crm/trend-chart";
@@ -25,7 +25,8 @@ export default function AdminPage() {
       return {
         id: booking.id,
         title: pitch?.name ?? booking.pitchId,
-        meta: `${slot ? formatDateTime(slot.startsAt) : "—"} · ${bookingStatusLabel(booking.status)}`,
+        meta: slot ? formatDateTime(slot.startsAt) : "—",
+        statusLabel: bookingStatusLabel(booking.status),
         href: `/rezervari/${booking.id}`,
       };
     });
@@ -57,7 +58,7 @@ export default function AdminPage() {
       </div>
 
       <div className="mt-8 grid gap-6 lg:grid-cols-2">
-        <section className="rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-forest)_14%,transparent)] p-5">
+        <section className="rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-ivory)_14%,transparent)] p-5">
           <BarChart
             title="Rezervări pe status"
             data={stats.byStatus.map((row) => ({
@@ -66,13 +67,13 @@ export default function AdminPage() {
             }))}
           />
         </section>
-        <section className="rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-forest)_14%,transparent)] p-5">
+        <section className="rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-ivory)_14%,transparent)] p-5">
           <TrendChart title="Rezervări pe zi" data={stats.series} />
         </section>
       </div>
 
       <section className="mt-8">
-        <h2 className="mb-3 font-display text-xl font-semibold text-[var(--color-forest)]">
+        <h2 className="mb-3 font-display text-xl font-semibold text-[var(--color-ivory)]">
           Activitate recentă
         </h2>
         <ActivityList items={recent} />

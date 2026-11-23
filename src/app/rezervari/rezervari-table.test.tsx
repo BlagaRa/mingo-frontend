@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { theme } from "@/config/theme";
 import {
   bookings,
@@ -53,11 +53,17 @@ describe("RezervariPage table", () => {
   });
 
 
-  it("lists bookings soonest first by date", async () => {
+  it("lists bookings soonest first by date in a mobile-ready table", async () => {
     const ui = await RezervariPage({
       searchParams: Promise.resolve({}),
     });
     render(ui);
+    const table = screen.getByRole("table");
+    expect(table).toHaveClass("mingo-data-table");
+    expect(within(table).getAllByRole("cell")[0]).toHaveAttribute(
+      "data-label",
+      "Teren",
+    );
     const ordered = bookingsSortedByStartsAt(bookings)
       .map((booking) => getSlot(booking.slotId)?.startsAt)
       .filter(Boolean)

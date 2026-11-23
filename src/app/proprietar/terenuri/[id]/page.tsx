@@ -3,23 +3,32 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { FormEvent, useState } from "react";
+import { PitchLocationMap } from "@/components/pitches/pitch-location-map";
 import { PageShell } from "@/components/layout/page-shell";
 import { Button } from "@/components/ui/button";
 import { ErrorState } from "@/components/ui/feedback";
 import { Input } from "@/components/ui/input";
 import { Dialog } from "@/components/ui/dialog";
+import { TimeField } from "@/components/ui/time-field";
+import { formatRon, getPitch } from "@/lib/mock/queries";
 import {
-  formatRon,
-  getPitch,
-  slotsForPitch,
-  formatDateTime,
-} from "@/lib/mock/queries";
+  getPitchProgram,
+  setPitchProgram,
+} from "@/lib/mock/program-store";
+import {
+  isPitchVisible,
+  setPitchVisible,
+} from "@/lib/mock/pitch-visibility-store";
 
 export default function EditPitchPage() {
   const params = useParams<{ id: string }>();
   const pitch = getPitch(params.id);
   const [saved, setSaved] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const [version, setVersion] = useState(0);
+  const [address, setAddress] = useState(
+    pitch ? `${pitch.oras}, ${pitch.zona}` : "",
+  );
 
   if (!pitch) {
     return (
@@ -37,7 +46,9 @@ export default function EditPitchPage() {
     );
   }
 
-  const slots = slotsForPitch(pitch.id);
+  void version;
+  const visible = isPitchVisible(pitch.id);
+  const program = getPitchProgram(pitch.id);
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -49,15 +60,27 @@ export default function EditPitchPage() {
       title={pitch.name}
       description={`${pitch.oras} · ${pitch.zona}`}
       actions={
-        <Button variant="danger" onClick={() => setDeleteOpen(true)}>
-          Șterge
-        </Button>
+        <div className="flex flex-wrap gap-2">
+          <Button
+            type="button"
+            variant={visible ? "accent" : "ghost"}
+            onClick={() => {
+              setPitchVisible(pitch.id, !visible);
+              setVersion((v) => v + 1);
+            }}
+          >
+            {visible ? "Vizibil" : "Ascuns"}
+          </Button>
+          <Button variant="danger" onClick={() => setDeleteOpen(true)}>
+            Șterge
+          </Button>
+        </div>
       }
     >
       <div className="grid gap-8 lg:grid-cols-2">
         <form
           onSubmit={onSubmit}
-          className="grid gap-4 rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-forest)_14%,transparent)] p-5"
+          className="grid gap-4 rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-ivory)_14%,transparent)] p-5"
         >
           <Input label="Nume" name="name" defaultValue={pitch.name} required />
           <Input label="Zonă" name="zona" defaultValue={pitch.zona} required />
@@ -68,19 +91,16 @@ export default function EditPitchPage() {
             defaultValue={pitch.pricePerHourRon}
           />
           <Input
-            label="Locație (lat)"
-            name="lat"
-            defaultValue={String(pitch.lat)}
+            label="Adresă"
+            name="address"
+            value={address}
+            onChange={(event) => setAddress(event.target.value)}
+            required
           />
-          <Input
-            label="Locație (lng)"
-            name="lng"
-            defaultValue={String(pitch.lng)}
-          />
-          <div
-            className="aspect-[16/10] rounded-[var(--radius-md)] bg-[var(--color-surface-muted)]"
-            role="img"
-            aria-label="Galerie foto teren"
+          <PitchLocationMap
+            lat={pitch.lat}
+            lng={pitch.lng}
+            address={address || `${pitch.oras}, ${pitch.zona}`}
           />
           <Button type="submit" variant="accent">
             Salvează modificările
@@ -92,14 +112,40 @@ export default function EditPitchPage() {
             </p>
           ) : null}
         </form>
-        <section className="rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-forest)_14%,transparent)] p-5">
-          <h2 className="text-[var(--type-h3)] font-semibold">Intervale</h2>
-          <ul className="mt-3 space-y-2 text-[var(--type-small)]">
-            {slots.map((slot) => (
-              <li key={slot.id}>{formatDateTime(slot.startsAt)}</li>
-            ))}
-          </ul>
-          <Button asChild variant="ghost" className="mt-4">
+        <section className="rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-ivory)_14%,transparent)] p-5">
+          <h2 className="text-[var(--type-h3)] font-semibold">Program</h2>
+          <p className="mt-3 text-[var(--type-small)] opacity-90">
+            Deschis implicit în intervalul de mai jos. Închizi zile sau ore doar
+            când vrei.
+          </p>
+          <div className="mt-4 flex flex-wrap items-end gap-3">
+            <TimeField
+              label="De la"
+              value={program.startHour}
+              onCommit={(startHour) => {
+                const end =
+                  startHour <= program.endHour ? program.endHour : startHour;
+                setPitchProgram(pitch.id, startHour, end);
+                setVersion((v) => v + 1);
+              }}
+            />
+            <TimeField
+              label="Până la"
+              value={program.endHour}
+              onCommit={(endHour) => {
+                const start =
+                  endHour >= program.startHour ? program.startHour : endHour;
+                setPitchProgram(pitch.id, start, endHour);
+                setVersion((v) => v + 1);
+              }}
+            />
+          </div>
+          <Button asChild variant="accent" className="mt-4">
+            <Link href={`/proprietar/disponibilitate?pitch=${pitch.id}`}>
+              Editează programul
+            </Link>
+          </Button>
+          <Button asChild variant="ghost" className="mt-2">
             <Link href={`/terenuri/${pitch.id}`}>Previzualizare publică</Link>
           </Button>
         </section>

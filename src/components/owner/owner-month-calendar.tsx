@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { theme } from "@/config/theme";
 import {
@@ -62,7 +62,7 @@ export function OwnerMonthCalendar({
         </button>
       </div>
 
-      <div className="grid grid-cols-7 text-center text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[var(--color-forest-fill)]">
+      <div className="grid grid-cols-7 text-center text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[var(--color-forest)] opacity-55">
         {WEEKDAY_LABELS.map((label) => (
           <div key={label} className="py-2">
             {label}
@@ -90,9 +90,13 @@ export function OwnerMonthCalendar({
                 backgroundColor: selected
                   ? theme.colors.coral
                   : marked
-                    ? theme.colors.coralSoft
+                    ? theme.colors.forest
                     : "transparent",
-                color: theme.colors.forest,
+                color: selected
+                  ? theme.colors.onCoral
+                  : marked
+                    ? theme.colors.ivory
+                    : theme.colors.forest,
               }}
             >
               {cell.label}
@@ -101,7 +105,11 @@ export function OwnerMonthCalendar({
                   data-testid="booking-dot"
                   aria-hidden
                   className="absolute bottom-1.5 h-1 w-1 rounded-full"
-                  style={{ backgroundColor: theme.colors.forest }}
+                  style={{
+                    backgroundColor: selected
+                      ? theme.colors.onCoral
+                      : theme.colors.coral,
+                  }}
                 />
               ) : null}
             </button>

@@ -62,7 +62,7 @@ export default async function PitchDetailPage({
           <PitchMap lat={pitch.lat} lng={pitch.lng} name={pitch.name} />
         </div>
         <aside className="space-y-6">
-          <section className="rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-forest)_14%,transparent)] p-4">
+          <section className="rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-ivory)_14%,transparent)] p-4">
             <h2 className="font-display text-[var(--type-h3)] font-semibold">
               Ore pe săptămână
             </h2>
@@ -75,7 +75,7 @@ export default async function PitchDetailPage({
               </Link>
             </Button>
           </section>
-          <section className="rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-forest)_14%,transparent)] p-4">
+          <section className="rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-ivory)_14%,transparent)] p-4">
             <h2 className="font-display text-[var(--type-h3)] font-semibold">
               Echipe incomplete
             </h2>

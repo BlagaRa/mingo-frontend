@@ -23,7 +23,7 @@ describe("ActionMenu", () => {
     );
 
     const trigger = screen.getByRole("button", { name: "Acțiuni" });
-    expect(trigger).toHaveTextContent("⋯");
+    expect(trigger).toHaveTextContent("⋮");
     expect(screen.queryByRole("menuitem", { name: "Confirmă" })).not.toBeInTheDocument();
 
     await user.click(trigger);

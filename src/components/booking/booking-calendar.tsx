@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useMemo, useState } from "react";
 import {
@@ -76,7 +76,7 @@ export function BookingCalendar({
         </button>
       </div>
 
-      <div className="grid grid-cols-7 text-center text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[var(--color-forest-fill)]">
+      <div className="grid grid-cols-7 text-center text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-[var(--color-forest)] opacity-55">
         {WEEKDAY_LABELS.map((label) => (
           <div key={label} className="py-2">
             {label}
@@ -99,7 +99,7 @@ export function BookingCalendar({
                 aria-label={`${cell.day} indisponibil`}
                 className="mx-auto flex h-11 w-11 cursor-not-allowed items-center justify-center rounded-full text-[0.95rem] font-medium tabular-nums sm:h-12 sm:w-12 sm:text-base"
                 style={{
-                  color: "color-mix(in srgb, var(--color-forest) 32%, var(--color-ivory))",
+                  color: "color-mix(in srgb, var(--color-forest) 42%, transparent)",
                 }}
               >
                 {cell.label}
@@ -118,9 +118,9 @@ export function BookingCalendar({
               className="mx-auto flex h-11 w-11 items-center justify-center rounded-full text-[0.95rem] font-semibold tabular-nums transition-[transform,background-color,color] duration-[var(--motion-press-ms)] ease-[var(--ease-out)] active:scale-[0.96] sm:h-12 sm:w-12 sm:text-base"
               style={{
                 backgroundColor: selected
-                  ? theme.colors.coral
-                  : theme.colors.coralSoft,
-                color: theme.colors.forest,
+                  ? theme.colors.forest
+                  : theme.colors.coral,
+                color: selected ? theme.colors.ivory : theme.colors.onCoral,
               }}
             >
               {cell.label}

@@ -15,6 +15,7 @@ export function adminPlatformStats(): {
     "full",
     "confirmed",
     "cancelled",
+    "pending",
   ];
   const byStatus = statusOrder
     .map((status) => ({

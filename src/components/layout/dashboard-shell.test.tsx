@@ -32,7 +32,7 @@ describe("DashboardShell", () => {
     );
   });
 
-  it("owner mode includes Rezervări after Terenuri", () => {
+  it("owner mode keeps Rezervări after Terenuri and drops Calendar and Teren nou", () => {
     render(
       <DashboardShell mode="owner">
         <p>child</p>
@@ -42,6 +42,16 @@ describe("DashboardShell", () => {
       "href",
       "/proprietar/rezervari",
     );
+    expect(screen.queryByRole("link", { name: "Calendar" })).toBeNull();
+    expect(screen.queryByRole("link", { name: "Teren nou" })).toBeNull();
+    expect(screen.getByRole("link", { name: "Abonament" })).toHaveAttribute(
+      "href",
+      "/proprietar/abonamente",
+    );
+    expect(screen.getByRole("link", { name: "← Site public" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Deschide meniul" }),
+    ).toBeInTheDocument();
     const nav = screen.getByRole("navigation", { name: "Dashboard" });
     const hrefs = [...nav.querySelectorAll("a")].map((a) =>
       a.getAttribute("href"),
@@ -52,3 +62,4 @@ describe("DashboardShell", () => {
     expect(rezervari).toBe(terenuri + 1);
   });
 });
+

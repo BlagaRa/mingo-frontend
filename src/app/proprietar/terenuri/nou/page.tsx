@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
@@ -22,7 +22,7 @@ export default function TerenNouPage() {
     >
       <form
         onSubmit={onSubmit}
-        className="mx-auto grid w-full max-w-xl gap-4 rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-forest)_14%,transparent)] p-5"
+        className="mx-auto grid w-full max-w-xl gap-4 rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-ivory)_14%,transparent)] p-5"
       >
         <Input label="Nume teren" name="name" required />
         <Input label="Județ" name="judet" required defaultValue="Cluj" />

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { Suspense, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
@@ -59,7 +59,7 @@ function AdminMembriClient() {
           <select
             name="role"
             defaultValue={role ?? ""}
-            className="rounded-[var(--radius-sm)] border border-[color-mix(in_srgb,var(--color-forest)_16%,transparent)] bg-transparent px-3 py-2"
+            className="rounded-[var(--radius-sm)] border border-[color-mix(in_srgb,var(--color-ivory)_16%,transparent)] bg-transparent px-3 py-2"
           >
             <option value="">Toate</option>
             <option value="player">{roleLabel.player}</option>
@@ -72,7 +72,7 @@ function AdminMembriClient() {
           <select
             name="status"
             defaultValue={status ?? ""}
-            className="rounded-[var(--radius-sm)] border border-[color-mix(in_srgb,var(--color-forest)_16%,transparent)] bg-transparent px-3 py-2"
+            className="rounded-[var(--radius-sm)] border border-[color-mix(in_srgb,var(--color-ivory)_16%,transparent)] bg-transparent px-3 py-2"
           >
             <option value="">Toate</option>
             <option value="active">{statusLabel.active}</option>
@@ -95,12 +95,18 @@ function AdminMembriClient() {
           : result.items.map((user) => (
               <tr
                 key={user.id}
-                className="border-t border-[color-mix(in_srgb,var(--color-forest)_10%,transparent)]"
+                className="border-t border-[color-mix(in_srgb,var(--color-ivory)_10%,transparent)]"
               >
-                <td className="px-4 py-3 font-medium">{user.name}</td>
-                <td className="px-4 py-3">{user.email}</td>
-                <td className="px-4 py-3">{roleLabel[user.role]}</td>
-                <td className="px-4 py-3">
+                <td data-label="Nume" className="px-4 py-3 font-medium">
+                  {user.name}
+                </td>
+                <td data-label="Email" className="px-4 py-3">
+                  {user.email}
+                </td>
+                <td data-label="Rol" className="px-4 py-3">
+                  {roleLabel[user.role]}
+                </td>
+                <td data-label="Status" className="px-4 py-3">
                   <span
                     className="rounded-full px-2 py-1 text-xs font-semibold"
                     style={{
@@ -108,13 +114,13 @@ function AdminMembriClient() {
                         user.status === "suspended"
                           ? theme.colors.coralSoft
                           : theme.colors.surfaceMuted,
-                      color: theme.colors.forest,
+                      color: theme.colors.ivory,
                     }}
                   >
                     {statusLabel[user.status ?? "active"]}
                   </span>
                 </td>
-                <td className="px-4 py-3">
+                <td data-label="" className="px-4 py-3">
                   <Button variant="ghost" onClick={() => setTarget(user)}>
                     Gestionează
                   </Button>

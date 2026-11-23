@@ -33,7 +33,7 @@ describe("Combobox", () => {
     expect(onValueChange).toHaveBeenCalledWith("Cluj");
   });
 
-  it("styles the active option with coral, not browser blue", async () => {
+  it("styles the active option with soft coral, not browser blue", async () => {
     const user = userEvent.setup();
     render(
       <Combobox
@@ -47,7 +47,22 @@ describe("Combobox", () => {
     const option = screen.getByRole("option", { name: "Cluj-Napoca" });
     expect(option).toHaveAttribute("aria-selected", "true");
     expect(option).toHaveStyle({ backgroundColor: theme.colors.coral });
-    expect(option).toHaveStyle({ color: theme.colors.forest });
+    expect(option).toHaveStyle({ color: theme.colors.onCoral });
+  });
+
+  it("supports a compact size for name pickers", () => {
+    render(
+      <Combobox
+        label="Teren"
+        size="sm"
+        value="p-1"
+        options={[{ value: "p-1", label: "Verde Nord 1" }]}
+        onValueChange={() => {}}
+      />,
+    );
+    expect(screen.getByRole("combobox", { name: "Teren" })).toHaveClass(
+      "text-[0.8125rem]",
+    );
   });
 
   it("shows an empty search state when nothing matches", async () => {

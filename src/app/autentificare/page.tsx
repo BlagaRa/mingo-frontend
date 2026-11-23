@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -29,7 +29,7 @@ export default function AutentificarePage() {
     >
       <form
         onSubmit={onSubmit}
-        className="mx-auto flex w-full max-w-md flex-col gap-4 rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-forest)_14%,transparent)] p-5"
+        className="mx-auto flex w-full max-w-md flex-col gap-4 rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-ivory)_14%,transparent)] p-5"
       >
         <Input
           label="Email"

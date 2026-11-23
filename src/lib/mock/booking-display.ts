@@ -3,8 +3,10 @@ import type { Booking, BookingStatus } from "./types";
 
 const labels: Record<BookingStatus, string> = {
   open: "Deschisă",
-  full: "Completă",
-  confirmed: "Confirmată",
+  /** Team filled seats — not the same as paid/settled. */
+  full: "Locuri pline",
+  /** Owner marked paid / settled. */
+  confirmed: "Încasată",
   cancelled: "Anulată",
   pending: "Neconfirmată",
 };
@@ -59,7 +61,7 @@ export function bookingStatusTone(status: BookingStatus): {
     case "confirmed":
       return {
         backgroundColor: theme.colors.surfaceMuted,
-        color: theme.colors.forest,
+        color: theme.colors.ivory,
       };
     case "cancelled":
       return {
@@ -69,7 +71,7 @@ export function bookingStatusTone(status: BookingStatus): {
     case "pending":
       return {
         backgroundColor: theme.colors.coralSoft,
-        color: theme.colors.forest,
+        color: theme.colors.ivory,
       };
   }
 }

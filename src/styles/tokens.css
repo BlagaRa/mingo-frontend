@@ -3,11 +3,11 @@
   --color-forest: #073035;
   --color-forest-fill: #1b6b5a;
   --color-coral: #ff8e79;
-  --color-ink: var(--color-forest);
+  --color-ink: var(--color-ivory);
   --color-on-forest: var(--color-ivory);
   --color-on-coral: var(--color-forest);
-  --color-surface-muted: #ede9df;
-  --color-coral-soft: #ffe4d8;
+  --color-surface-muted: #0e4a51;
+  --color-coral-soft: #5c342e;
   --color-status-open: #f1e6a8;
   --color-status-danger: #ffb4a3;
 
@@ -22,9 +22,10 @@
   --type-h3: 1.25rem;
 
   --motion-press-ms: 160ms;
+  --motion-hover-ms: 320ms;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 
   --min-viewport: 360px;
-  --page-gutter: clamp(1rem, 4vw, 2.5rem);
-  --content-max: 72rem;
+  --page-gutter: clamp(1rem, 2.2vw, 1.5rem);
+  --content-max: 80rem;
 }

@@ -12,15 +12,18 @@ describe("CrmPagination", () => {
         filters={{ status: "open", page: "2" }}
       />,
     );
-    expect(screen.getByRole("link", { name: "2" })).toHaveAttribute(
+    const pageTwo = screen.getByRole("link", { name: "2" });
+    expect(pageTwo).toHaveAttribute(
       "href",
       "/admin/rezervari?status=open&page=2",
     );
+    expect(pageTwo).toHaveAttribute("data-scroll-preserve", "true");
     expect(screen.getByRole("link", { name: "1" })).toHaveAttribute(
       "href",
       "/admin/rezervari?status=open",
     );
   });
+
 
   it("hides when totalPages is 1", () => {
     const { container } = render(

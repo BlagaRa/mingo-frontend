@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { Suspense } from "react";
 import { PageShell } from "@/components/layout/page-shell";
 import { PitchCard } from "@/components/pitches/pitch-card";
@@ -68,7 +68,7 @@ export default async function TerenuriPage({
         />
       ) : (
         <>
-          <p className="mt-6 text-sm text-[var(--color-forest-fill)]">
+          <p className="mt-6 text-sm text-[var(--color-coral)]">
             {result.total} terenuri · pagina {result.page} din {result.totalPages}
           </p>
           <div className="mt-4 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

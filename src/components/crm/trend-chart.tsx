@@ -1,4 +1,4 @@
-import { theme } from "@/config/theme";
+﻿import { theme } from "@/config/theme";
 import type { ChartDatum } from "./bar-chart";
 
 export function TrendChart({
@@ -28,7 +28,7 @@ export function TrendChart({
 
   return (
     <div role="img" aria-label={title}>
-      <p className="mb-3 text-sm font-semibold text-[var(--color-forest)]">
+      <p className="mb-3 text-sm font-semibold text-[var(--color-ivory)]">
         {title}
       </p>
       <svg
@@ -38,7 +38,7 @@ export function TrendChart({
       >
         <polyline
           fill="none"
-          stroke={theme.colors.forestFill}
+          stroke={theme.colors.coral}
           strokeWidth="2.5"
           strokeLinejoin="round"
           strokeLinecap="round"

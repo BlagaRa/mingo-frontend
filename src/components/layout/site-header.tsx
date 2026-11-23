@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -16,7 +16,7 @@ const roleLinks: Record<DemoRole, { href: string; label: string }[]> = {
   owner: [
     { href: "/proprietar", label: "Panou" },
     { href: "/proprietar/terenuri", label: "Terenuri" },
-    { href: "/proprietar/calendar", label: "Calendar" },
+    { href: "/proprietar/rezervari", label: "Rezervări" },
   ],
   admin: [
     { href: "/admin", label: "Panou" },
@@ -32,12 +32,12 @@ export function SiteHeader() {
   const router = useRouter();
 
   return (
-    <header className="border-b border-[color-mix(in_srgb,var(--color-forest)_14%,transparent)] bg-[var(--color-ivory)]">
+    <header className="border-b border-[color-mix(in_srgb,var(--color-ivory)_14%,transparent)] bg-[var(--color-forest)]">
       <div className="mx-auto flex w-full max-w-[var(--content-max)] flex-wrap items-center justify-between gap-4 px-[var(--page-gutter)] py-4">
         <div className="flex items-center gap-6">
           <Link
             href="/"
-            className="font-display text-[1.5rem] font-semibold tracking-tight text-[var(--color-forest)]"
+            className="font-display text-[1.5rem] font-semibold tracking-tight text-[var(--color-ivory)]"
           >
             {appConfig.name}
           </Link>
@@ -75,17 +75,17 @@ export function SiteHeader() {
               else router.push("/");
             }}
           />
-          <Button asChild variant="ghost">
-            <Link href="/autentificare">Intră</Link>
+          <Button asChild variant="soft">
+            <Link href="/autentificare">Login</Link>
           </Button>
           <Button asChild variant="accent">
-            <Link href="/inregistrare">Înregistrare</Link>
+            <Link href="/inregistrare">Înregistrează-te</Link>
           </Button>
         </div>
       </div>
       <nav
         aria-label="Mobil"
-        className="flex gap-4 overflow-x-auto border-t border-[color-mix(in_srgb,var(--color-forest)_10%,transparent)] px-[var(--page-gutter)] py-3 sm:hidden"
+        className="flex gap-4 overflow-x-auto border-t border-[color-mix(in_srgb,var(--color-ivory)_10%,transparent)] px-[var(--page-gutter)] py-3 sm:hidden"
       >
         {roleLinks[role].map((item) => (
           <Link key={item.href} href={item.href} className="whitespace-nowrap text-[var(--type-small)]">

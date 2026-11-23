@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { Suspense } from "react";
 import { PageShell } from "@/components/layout/page-shell";
 import { BookingFilters } from "@/components/booking/booking-filters";
@@ -89,8 +89,8 @@ export default async function RezervariPage({
           }
         />
       ) : (
-        <div className="overflow-x-auto rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-forest)_14%,transparent)] bg-[var(--color-ivory)] shadow-[0_10px_24px_color-mix(in_srgb,var(--color-forest)_8%,transparent)]">
-          <table className="min-w-full text-left text-sm">
+        <div className="rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-ivory)_14%,transparent)] bg-[var(--color-surface-muted)] shadow-[0_10px_24px_color-mix(in_srgb,var(--color-ivory)_8%,transparent)] md:overflow-x-auto">
+          <table className="mingo-data-table min-w-full text-left text-sm">
             <thead style={{ backgroundColor: theme.colors.surfaceMuted }}>
               <tr>
                 <th className="px-4 py-3 font-semibold">Teren</th>
@@ -107,21 +107,24 @@ export default async function RezervariPage({
                 return (
                   <tr
                     key={booking.id}
-                    className="border-t border-[color-mix(in_srgb,var(--color-forest)_10%,transparent)]"
+                    className="border-t border-[color-mix(in_srgb,var(--color-ivory)_10%,transparent)]"
                   >
-                    <td className="px-4 py-3 font-medium text-[var(--color-forest)]">
+                    <td
+                      data-label="Teren"
+                      className="px-4 py-3 font-medium text-[var(--color-ivory)]"
+                    >
                       {pitch?.name ?? booking.pitchId}
                     </td>
-                    <td className="px-4 py-3 tabular-nums">
+                    <td data-label="Dată" className="px-4 py-3 tabular-nums">
                       {slot ? formatDateTime(slot.startsAt) : "—"}
                     </td>
-                    <td className="px-4 py-3">
+                    <td data-label="Status" className="px-4 py-3">
                       <StatusBadge status={booking.status} />
                     </td>
-                    <td className="px-4 py-3 tabular-nums">
+                    <td data-label="Locuri" className="px-4 py-3 tabular-nums">
                       {bookingSeatsLabel(booking)}
                     </td>
-                    <td className="px-4 py-3 text-right">
+                    <td data-label="" className="px-4 py-3 text-right">
                       <Button asChild variant="ghost">
                         <Link href={`/rezervari/${booking.id}`}>Deschide</Link>
                       </Button>

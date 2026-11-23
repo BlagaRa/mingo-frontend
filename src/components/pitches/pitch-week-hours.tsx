@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -56,11 +56,11 @@ export function PitchWeekHours({
           disabled={!canGoPrev}
           onClick={() => setWeekMonday(shiftWeek(weekMonday, -1))}
           className="flex h-9 w-9 items-center justify-center rounded-full text-lg font-semibold transition-transform duration-[var(--motion-press-ms)] ease-[var(--ease-out)] enabled:active:scale-[0.96] disabled:opacity-25"
-          style={{ color: theme.colors.forest }}
+          style={{ color: theme.colors.ivory }}
         >
           ‹
         </button>
-        <p className="font-display text-sm font-semibold capitalize tracking-tight text-[var(--color-forest)] sm:text-base">
+        <p className="font-display text-sm font-semibold capitalize tracking-tight text-[var(--color-ivory)] sm:text-base">
           {formatWeekTitle(weekMonday)}
         </p>
         <button
@@ -69,7 +69,7 @@ export function PitchWeekHours({
           disabled={!canGoNext}
           onClick={() => setWeekMonday(shiftWeek(weekMonday, 1))}
           className="flex h-9 w-9 items-center justify-center rounded-full text-lg font-semibold transition-transform duration-[var(--motion-press-ms)] ease-[var(--ease-out)] enabled:active:scale-[0.96] disabled:opacity-25"
-          style={{ color: theme.colors.forest }}
+          style={{ color: theme.colors.ivory }}
         >
           ›
         </button>
@@ -82,7 +82,7 @@ export function PitchWeekHours({
           const dayNumber = Number(day.slice(8, 10));
           return (
             <div key={day} className="flex flex-col items-center gap-1">
-              <span className="text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-[var(--color-forest-fill)]">
+              <span className="text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-[var(--color-coral)]">
                 {WEEKDAY_LABELS[index]}
               </span>
               <button
@@ -101,8 +101,10 @@ export function PitchWeekHours({
                       ? theme.colors.coralSoft
                       : "transparent",
                   color: selectable
-                    ? theme.colors.forest
-                    : "color-mix(in srgb, var(--color-forest) 32%, var(--color-ivory))",
+                    ? selected
+                      ? theme.colors.onCoral
+                      : theme.colors.ivory
+                    : "color-mix(in srgb, var(--color-ivory) 32%, transparent)",
                 }}
               >
                 {dayNumber}
@@ -115,7 +117,7 @@ export function PitchWeekHours({
       <div className="mt-5" aria-live="polite">
         {selectedDay ? (
           <>
-            <p className="text-sm font-semibold text-[var(--color-forest)]">
+            <p className="text-sm font-semibold text-[var(--color-ivory)]">
               {formatDayLong(selectedDay)}
             </p>
             {hours.length === 0 ? (
@@ -130,7 +132,7 @@ export function PitchWeekHours({
                   <Link
                     key={slot.id}
                     href={`/rezervari/nou?pitchId=${pitchId}&slotId=${slot.id}`}
-                    className="rounded-[var(--radius-sm)] border border-[color-mix(in_srgb,var(--color-forest)_16%,transparent)] bg-[var(--color-ivory)] px-3 py-2 text-sm font-semibold tabular-nums transition-transform duration-[var(--motion-press-ms)] ease-[var(--ease-out)] active:scale-[0.97]"
+                    className="rounded-[var(--radius-sm)] border border-[color-mix(in_srgb,var(--color-ivory)_16%,transparent)] bg-[var(--color-surface-muted)] px-3 py-2 text-sm font-semibold tabular-nums transition-transform duration-[var(--motion-press-ms)] ease-[var(--ease-out)] active:scale-[0.97]"
                   >
                     {formatHour(slot.startsAt)}
                   </Link>

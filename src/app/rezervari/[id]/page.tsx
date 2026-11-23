@@ -8,11 +8,11 @@ import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
 import { ErrorState } from "@/components/ui/feedback";
 import { StatusBadge } from "@/components/ui/status-badge";
+import { getBooking } from "@/lib/mock/booking-store";
 import {
   bookingPriceRon,
   formatDateTime,
   formatRon,
-  getBooking,
   getPitch,
   getSlot,
   openSeats,
@@ -62,7 +62,7 @@ export default function RezervareDetailPage() {
       <div className="mx-auto grid w-full max-w-2xl gap-4">
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           <div
-            className="rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-forest)_12%,transparent)] p-4"
+            className="rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-ivory)_12%,transparent)] p-4"
             style={{ backgroundColor: theme.colors.surfaceMuted }}
           >
             <p className="text-xs opacity-70">Status</p>
@@ -82,11 +82,11 @@ export default function RezervareDetailPage() {
           ].map((item) => (
             <div
               key={item.label}
-              className="rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-forest)_12%,transparent)] p-4"
+              className="rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-ivory)_12%,transparent)] p-4"
               style={{ backgroundColor: theme.colors.surfaceMuted }}
             >
               <p className="text-xs opacity-70">{item.label}</p>
-              <p className="mt-1 font-semibold capitalize text-[var(--color-forest)]">
+              <p className="mt-1 font-semibold capitalize text-[var(--color-ivory)]">
                 {item.value}
               </p>
             </div>

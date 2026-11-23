@@ -3,15 +3,16 @@ import { describe, expect, it } from "vitest";
 import { DataTable } from "./data-table";
 
 describe("DataTable", () => {
-  it("renders column headers and row children", () => {
+  it("renders column headers and row children in a mobile-ready table", () => {
     render(
       <DataTable columns={["Nume", "Rol"]}>
         <tr>
-          <td>Andrei</td>
-          <td>player</td>
+          <td data-label="Nume">Andrei</td>
+          <td data-label="Rol">player</td>
         </tr>
       </DataTable>,
     );
+    expect(screen.getByRole("table")).toHaveClass("mingo-data-table");
     expect(screen.getByRole("columnheader", { name: "Nume" })).toBeInTheDocument();
     expect(screen.getByText("Andrei")).toBeInTheDocument();
   });

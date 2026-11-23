@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { beforeEach, describe, expect, it } from "vitest";
 import {
   bookingPriceRon,
   bookingsSortedByStartsAt,
@@ -12,8 +12,16 @@ import {
   uniqueLocations,
 } from "./queries";
 import { bookings, pitches } from "./fixtures";
+import {
+  resetPitchVisibilityStore,
+  setPitchVisible,
+} from "./pitch-visibility-store";
 
 describe("filterPitches", () => {
+  beforeEach(() => {
+    resetPitchVisibilityStore();
+  });
+
   it("filters by judet oras and zona", () => {
     const result = filterPitches(pitches, {
       judet: "Cluj",
@@ -33,9 +41,20 @@ describe("filterPitches", () => {
   it("returns all pitches when filters are empty", () => {
     expect(filterPitches(pitches, {})).toHaveLength(pitches.length);
   });
+
+  it("hides pitches marked not visible", () => {
+    setPitchVisible("p-1", false);
+    const result = filterPitches(pitches, {});
+    expect(result.some((pitch) => pitch.id === "p-1")).toBe(false);
+    expect(result).toHaveLength(pitches.length - 1);
+  });
 });
 
 describe("queryPitchesPage", () => {
+  beforeEach(() => {
+    resetPitchVisibilityStore();
+  });
+
   it("paginates filtered pitches on the server with page metadata", () => {
     const first = queryPitchesPage({ page: "1" });
     expect(first.page).toBe(1);
@@ -106,9 +125,17 @@ describe("uniqueLocations", () => {
 });
 
 describe("ownerBookingStats", () => {
-  it("aggregates cancelled and confirmed for an owner", () => {
+  it("aggregates cancelled, confirmed and pending for an owner", () => {
     const stats = ownerBookingStats("u-owner");
     expect(stats.total).toBeGreaterThan(0);
     expect(stats.cancelled).toBeGreaterThanOrEqual(1);
+    expect(stats.pending).toBeGreaterThanOrEqual(0);
+    expect(
+      stats.confirmed +
+        stats.cancelled +
+        stats.open +
+        stats.full +
+        stats.pending,
+    ).toBe(stats.total);
   });
 });

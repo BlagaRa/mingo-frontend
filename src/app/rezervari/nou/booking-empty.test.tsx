@@ -12,8 +12,16 @@ vi.mock("@/lib/mock/schedule", async (importOriginal) => {
   return {
     ...actual,
     availableDays: () => ["2026-11-24"],
-    freeHoursForDay: () => [],
     formatDayLong: () => "Marți, 24 noiembrie",
+  };
+});
+
+vi.mock("@/lib/mock/booking-store", async (importOriginal) => {
+  const actual =
+    await importOriginal<typeof import("@/lib/mock/booking-store")>();
+  return {
+    ...actual,
+    freeBookableHoursForDay: () => [],
   };
 });
 

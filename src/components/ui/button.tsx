@@ -10,23 +10,28 @@ import { theme } from "@/config/theme";
 
 const variants = {
   primary: {
-    backgroundColor: theme.colors.forestFill,
-    color: theme.colors.onForest,
-    borderColor: theme.colors.forestFill,
+    backgroundColor: theme.colors.coral,
+    color: theme.colors.onCoral,
+    borderColor: theme.colors.coral,
   },
   accent: {
     backgroundColor: theme.colors.coral,
     color: theme.colors.onCoral,
     borderColor: theme.colors.coral,
   },
+  soft: {
+    backgroundColor: theme.colors.ivory,
+    color: theme.colors.forest,
+    borderColor: theme.colors.ivory,
+  },
   ghost: {
     backgroundColor: "transparent",
     color: theme.colors.ink,
-    borderColor: "color-mix(in srgb, #073035 22%, transparent)",
+    borderColor: "color-mix(in srgb, var(--color-ivory) 22%, transparent)",
   },
   danger: {
     backgroundColor: theme.colors.coralSoft,
-    color: theme.colors.forest,
+    color: theme.colors.ivory,
     borderColor: theme.colors.coral,
   },
 } as const;
@@ -40,7 +45,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const baseClass =
-  "inline-flex items-center justify-center gap-2 border px-4 py-2.5 text-[length:var(--type-small)] font-semibold tracking-tight rounded-[var(--radius-sm)] transition-[transform,opacity,box-shadow,background-color,border-color,color] duration-[var(--motion-press-ms)] ease-[var(--ease-out)] disabled:opacity-50 disabled:pointer-events-none active:scale-[0.97] [@media(hover:hover)_and_(pointer:fine)]:hover:-translate-y-px [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-[0_8px_18px_color-mix(in_srgb,var(--color-forest)_16%,transparent)]";
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap border px-4 py-2.5 text-[length:var(--type-small)] font-semibold tracking-tight rounded-[var(--radius-sm)] transition-[transform,opacity,box-shadow,background-color,border-color,color] duration-[var(--motion-hover-ms)] ease-[var(--ease-out)] disabled:opacity-50 disabled:pointer-events-none active:scale-[0.97] [@media(hover:hover)_and_(pointer:fine)]:hover:-translate-y-px [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-[0_8px_18px_color-mix(in_srgb,var(--color-coral)_28%,transparent)]";
 
 export function Button({
   variant = "primary",

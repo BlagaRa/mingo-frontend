@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
@@ -55,12 +55,12 @@ export function BookingFilters() {
           className="rounded-full px-3 py-1.5 text-xs font-semibold transition-[transform,background-color] duration-[var(--motion-press-ms)] ease-[var(--ease-out)] active:scale-[0.97]"
           style={{
             backgroundColor: !status
-              ? theme.colors.forestFill
-              : theme.colors.ivory,
-            color: !status ? theme.colors.ivory : theme.colors.forest,
+              ? theme.colors.coral
+              : theme.colors.surfaceMuted,
+            color: !status ? theme.colors.onCoral : theme.colors.ivory,
             boxShadow: !status
               ? "none"
-              : "inset 0 0 0 1px color-mix(in srgb, #073035 12%, transparent)",
+              : "inset 0 0 0 1px color-mix(in srgb, #F7F5ED 14%, transparent)",
           }}
         >
           Toate
@@ -77,11 +77,11 @@ export function BookingFilters() {
               style={{
                 backgroundColor: active
                   ? theme.colors.coral
-                  : theme.colors.ivory,
-                color: theme.colors.forest,
+                  : theme.colors.surfaceMuted,
+                color: active ? theme.colors.onCoral : theme.colors.ivory,
                 boxShadow: active
                   ? "none"
-                  : "inset 0 0 0 1px color-mix(in srgb, #073035 12%, transparent)",
+                  : "inset 0 0 0 1px color-mix(in srgb, #F7F5ED 14%, transparent)",
               }}
             >
               {bookingStatusLabel(value)}
@@ -105,7 +105,7 @@ export function BookingFilters() {
             onClick={() => {
               router.replace("/rezervari", { scroll: false });
             }}
-            className="mb-0.5 text-sm font-semibold text-[var(--color-forest-fill)] underline-offset-4 transition-opacity duration-[var(--motion-press-ms)] ease-[var(--ease-out)] hover:underline active:opacity-70"
+            className="mb-0.5 text-sm font-semibold text-[var(--color-coral)] underline-offset-4 transition-opacity duration-[var(--motion-press-ms)] ease-[var(--ease-out)] hover:underline active:opacity-70"
           >
             Resetează
           </button>

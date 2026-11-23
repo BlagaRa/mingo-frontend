@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { PageShell } from "@/components/layout/page-shell";
@@ -23,12 +23,12 @@ export default function ContPage() {
         <section
           className="rounded-[var(--radius-md)] border p-6"
           style={{
-            borderColor: "color-mix(in srgb, #073035 14%, transparent)",
+            borderColor: "color-mix(in srgb, #F7F5ED 14%, transparent)",
             backgroundColor: theme.colors.surfaceMuted,
           }}
         >
           <p className="text-sm opacity-70">Rol activ</p>
-          <p className="mt-1 font-display text-3xl font-semibold capitalize text-[var(--color-forest)]">
+          <p className="mt-1 font-display text-3xl font-semibold capitalize text-[var(--color-ivory)]">
             {role === "player"
               ? "Jucător"
               : role === "owner"
@@ -51,8 +51,8 @@ export default function ContPage() {
           </div>
         </section>
 
-        <section className="rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-forest)_14%,transparent)] p-6">
-          <h2 className="font-display text-xl font-semibold text-[var(--color-forest)]">
+        <section className="rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-ivory)_14%,transparent)] p-6">
+          <h2 className="font-display text-xl font-semibold text-[var(--color-ivory)]">
             Spații rapide
           </h2>
           <p className="mt-2 text-sm opacity-80">

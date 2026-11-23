@@ -1,4 +1,4 @@
-type BookingContactProps = {
+﻿type BookingContactProps = {
   email: string;
   phone: string;
 };
@@ -9,10 +9,10 @@ function ContactRow({ label, value }: { label: string; value: string }) {
       data-testid="booking-contact-row"
       className="flex flex-col gap-0.5 text-[var(--type-small)]"
     >
-      <span className="font-medium uppercase tracking-wide opacity-70 text-[var(--color-forest)]">
+      <span className="font-medium uppercase tracking-wide opacity-70 text-[var(--color-ivory)]">
         {label}
       </span>
-      <span className="text-[0.95rem] font-medium text-[var(--color-forest)]">
+      <span className="text-[0.95rem] font-medium text-[var(--color-ivory)]">
         {value}
       </span>
     </div>

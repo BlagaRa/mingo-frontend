@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { EmptyState, Skeleton } from "@/components/ui/feedback";
 import { Input } from "@/components/ui/input";
 import { SelectField } from "@/components/ui/select-field";
-import { upsertBooking } from "@/lib/mock/booking-store";
+import { freeBookableHoursForDay, upsertBooking } from "@/lib/mock/booking-store";
 import { isValidRoPhone } from "@/lib/mock/phone";
 import {
   bookingPriceRon,
@@ -20,7 +20,6 @@ import {
   availableDays,
   formatDayLong,
   formatHour,
-  freeHoursForDay,
 } from "@/lib/mock/schedule";
 import { theme } from "@/config/theme";
 
@@ -42,7 +41,7 @@ function NewBookingForm() {
   const pitch = getPitch(pitchId);
   const days = useMemo(() => availableDays(pitchId), [pitchId]);
   const hours = useMemo(
-    () => (day ? freeHoursForDay(pitchId, day) : []),
+    () => (day ? freeBookableHoursForDay(pitchId, day) : []),
     [pitchId, day],
   );
   const total = pitch ? bookingPriceRon(pitch) : 0;
@@ -89,29 +88,29 @@ function NewBookingForm() {
     >
       <header className="mb-8 flex flex-col gap-6 lg:mb-10 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-xl">
-          <h1 className="font-display text-[length:var(--type-h1)] font-semibold tracking-tight text-[var(--color-forest)]">
+          <h1 className="font-display text-[length:var(--type-h1)] font-semibold tracking-tight text-[var(--color-ivory)]">
             Rezervă
           </h1>
-          <p className="mt-2 max-w-[40ch] text-[var(--type-body)] text-[var(--color-forest-fill)]">
+          <p className="mt-2 max-w-[40ch] text-[var(--type-body)] text-[var(--color-coral)]">
             Alege o zi liberă, apoi ora.
           </p>
         </div>
 
         <div className="w-full max-w-sm">
           {pitchLocked && pitch ? (
-            <div className="rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-forest)_12%,transparent)] bg-[var(--color-surface-muted)] px-4 py-3">
-              <p className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--color-forest-fill)]">
+            <div className="rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-ivory)_12%,transparent)] bg-[var(--color-surface-muted)] px-4 py-3">
+              <p className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--color-coral)]">
                 Teren ales
               </p>
-              <p className="mt-1 font-semibold text-[var(--color-forest)]">
+              <p className="mt-1 font-semibold text-[var(--color-ivory)]">
                 {pitch.name}
               </p>
-              <p className="text-sm text-[var(--color-forest-fill)]">
+              <p className="text-sm text-[var(--color-ivory)]/80">
                 {pitch.oras} · {pitch.zona}
               </p>
               <Link
                 href="/terenuri"
-                className="mt-3 inline-block text-sm font-semibold text-[var(--color-forest)] underline underline-offset-4"
+                className="mt-3 inline-block text-sm font-semibold text-[var(--color-ivory)] underline underline-offset-4"
               >
                 Alege alt teren
               </Link>
@@ -167,10 +166,10 @@ function NewBookingForm() {
             />
           ) : (
             <>
-              <h2 className="font-display text-xl font-semibold tracking-tight text-[var(--color-forest)] sm:text-2xl">
+              <h2 className="font-display text-xl font-semibold tracking-tight text-[var(--color-ivory)] sm:text-2xl">
                 {formatDayLong(day)}
               </h2>
-              <p className="mt-2 text-sm text-[var(--color-forest-fill)]">
+              <p className="mt-2 text-sm text-[var(--color-coral)]">
                 Ore libere
               </p>
               {hours.length === 0 ? (
@@ -192,8 +191,10 @@ function NewBookingForm() {
                         style={{
                           backgroundColor: active
                             ? theme.colors.coral
-                            : theme.colors.surfaceMuted,
-                          color: theme.colors.forest,
+                            : theme.colors.ivory,
+                          color: active
+                            ? theme.colors.onCoral
+                            : theme.colors.forest,
                         }}
                       >
                         {formatHour(slot.startsAt)}
@@ -205,7 +206,7 @@ function NewBookingForm() {
             </>
           )}
 
-          <div className="mt-10 flex flex-col gap-6 border-t border-[color-mix(in_srgb,var(--color-forest)_12%,transparent)] pt-8">
+          <div className="mt-10 flex flex-col gap-6 border-t border-[color-mix(in_srgb,var(--color-ivory)_12%,transparent)] pt-8">
             <div className="grid gap-4 sm:grid-cols-2">
               <Input
                 label="Nume"
@@ -253,12 +254,12 @@ function NewBookingForm() {
                 />
               </div>
               <div>
-                <p className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--color-forest-fill)]">
+                <p className="text-xs font-medium uppercase tracking-[0.08em] text-[var(--color-coral)]">
                   Total
                 </p>
-                <p className="mt-1 font-display text-2xl font-semibold text-[var(--color-forest)]">
+                <p className="mt-1 font-display text-2xl font-semibold text-[var(--color-ivory)]">
                   {formatRon(total)}
-                  <span className="ml-2 text-sm font-sans font-medium text-[var(--color-forest-fill)]">
+                  <span className="ml-2 text-sm font-sans font-medium text-[var(--color-coral)]">
                     / oră
                   </span>
                 </p>

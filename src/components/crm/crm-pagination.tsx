@@ -16,6 +16,8 @@ function buildHref(
   return query ? `${basePath}?${query}` : basePath;
 }
 
+const ivoryEdge = "inset 0 0 0 1px color-mix(in srgb, #F7F5ED 16%, transparent)";
+
 export function CrmPagination({
   basePath,
   page,
@@ -40,11 +42,13 @@ export function CrmPagination({
     >
       <Link
         href={buildHref(basePath, Math.max(1, page - 1), filters)}
+        scroll={false}
+        data-scroll-preserve="true"
         aria-disabled={page <= 1}
         className="rounded-[var(--radius-sm)] px-3 py-2 text-sm font-semibold transition-[transform,opacity] duration-[var(--motion-press-ms)] ease-[var(--ease-out)] active:scale-[0.97] aria-disabled:pointer-events-none aria-disabled:opacity-35"
         style={{
-          color: theme.colors.forest,
-          boxShadow: "inset 0 0 0 1px color-mix(in srgb, #073035 12%, transparent)",
+          color: theme.colors.ivory,
+          boxShadow: ivoryEdge,
         }}
       >
         Înapoi
@@ -55,16 +59,14 @@ export function CrmPagination({
           <Link
             key={value}
             href={buildHref(basePath, value, filters)}
+            scroll={false}
+            data-scroll-preserve="true"
             aria-current={active ? "page" : undefined}
             className="min-w-10 rounded-[var(--radius-sm)] px-3 py-2 text-center text-sm font-semibold tabular-nums transition-[transform,background-color] duration-[var(--motion-press-ms)] ease-[var(--ease-out)] active:scale-[0.97]"
             style={{
-              backgroundColor: active
-                ? theme.colors.coral
-                : theme.colors.ivory,
-              color: theme.colors.forest,
-              boxShadow: active
-                ? "none"
-                : "inset 0 0 0 1px color-mix(in srgb, #073035 12%, transparent)",
+              backgroundColor: active ? theme.colors.coral : "transparent",
+              color: active ? theme.colors.onCoral : theme.colors.ivory,
+              boxShadow: active ? "none" : ivoryEdge,
             }}
           >
             {value}
@@ -73,11 +75,13 @@ export function CrmPagination({
       })}
       <Link
         href={buildHref(basePath, Math.min(totalPages, page + 1), filters)}
+        scroll={false}
+        data-scroll-preserve="true"
         aria-disabled={page >= totalPages}
         className="rounded-[var(--radius-sm)] px-3 py-2 text-sm font-semibold transition-[transform,opacity] duration-[var(--motion-press-ms)] ease-[var(--ease-out)] active:scale-[0.97] aria-disabled:pointer-events-none aria-disabled:opacity-35"
         style={{
-          color: theme.colors.forest,
-          boxShadow: "inset 0 0 0 1px color-mix(in srgb, #073035 12%, transparent)",
+          color: theme.colors.ivory,
+          boxShadow: ivoryEdge,
         }}
       >
         Înainte

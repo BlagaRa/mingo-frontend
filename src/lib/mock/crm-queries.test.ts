@@ -21,6 +21,7 @@ describe("crm-queries", () => {
     expect(stats.byStatus.length).toBeGreaterThan(0);
     const statusSum = stats.byStatus.reduce((sum, row) => sum + row.count, 0);
     expect(statusSum).toBe(bookings.length);
+    expect(stats.byStatus).toContainEqual({ status: "pending", count: 1 });
     expect(stats.series.length).toBeGreaterThanOrEqual(1);
   });
 

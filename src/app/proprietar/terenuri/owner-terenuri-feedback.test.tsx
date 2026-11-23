@@ -12,6 +12,8 @@ vi.mock("@/lib/mock/queries", async (importOriginal) => {
 
 vi.mock("next/navigation", () => ({
   useParams: () => ({ id: "missing-pitch" }),
+  useSearchParams: () => new URLSearchParams(""),
+  useRouter: () => ({ replace: vi.fn(), push: vi.fn() }),
 }));
 
 import ProprietarTerenuriPage from "./page";
@@ -25,10 +27,9 @@ describe("owner pitch feedback", () => {
     });
     render(ui);
     expect(screen.getByRole("status")).toHaveTextContent("Niciun teren încă");
-    expect(screen.getByRole("link", { name: "Adaugă teren" })).toHaveAttribute(
-      "href",
-      "/proprietar/terenuri/nou",
-    );
+    expect(
+      screen.getAllByRole("link", { name: "Adaugă teren" })[0],
+    ).toHaveAttribute("href", "/proprietar/terenuri/nou");
   });
 
   it("shows error state when editing a missing pitch", () => {
@@ -42,7 +43,7 @@ describe("owner pitch feedback", () => {
   it("shows empty state on availability without pitches", () => {
     render(<OwnerAvailabilityPage />);
     expect(screen.getByText("Adaugă un teren întâi")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Teren nou" })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: "Adaugă teren" })).toHaveAttribute(
       "href",
       "/proprietar/terenuri/nou",
     );

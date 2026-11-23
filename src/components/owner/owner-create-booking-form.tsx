@@ -1,13 +1,15 @@
-"use client";
+﻿"use client";
 
 import { FormEvent, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SelectField } from "@/components/ui/select-field";
-import { listBookings, upsertBooking } from "@/lib/mock/booking-store";
+import { freeBookableHoursForDay, upsertBooking } from "@/lib/mock/booking-store";
 import { DEMO_OWNER_ID } from "@/lib/mock/demo";
 import { isValidRoPhone } from "@/lib/mock/phone";
-import { formatHour, freeHoursForDay } from "@/lib/mock/schedule";
+import { programHoursForPitch } from "@/lib/mock/program-store";
+import { formatHour } from "@/lib/mock/schedule";
+import { isStartOpen } from "@/lib/mock/slot-store";
 import type { Pitch } from "@/lib/mock/types";
 
 type Props = {
@@ -24,12 +26,10 @@ export function OwnerCreateBookingForm({ pitches, day, onDone }: Props) {
   const [contactPhone, setContactPhone] = useState("");
   const [phoneError, setPhoneError] = useState("");
 
-  const taken = new Set(
-    listBookings()
-      .filter((b) => b.status !== "cancelled")
-      .map((b) => b.slotId),
-  );
-  const free = freeHoursForDay(pitchId, day).filter((s) => !taken.has(s.id));
+  const free = freeBookableHoursForDay(pitchId, day);
+  const openCount = programHoursForPitch(pitchId).filter((hour) =>
+    isStartOpen(pitchId, day, hour),
+  ).length;
   const chosen = free.some((s) => s.id === slotId) ? slotId : free[0]?.id;
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -57,7 +57,7 @@ export function OwnerCreateBookingForm({ pitches, day, onDone }: Props) {
     <form
       aria-label="Rezervare nouă"
       onSubmit={onSubmit}
-      className="mb-6 grid gap-4 rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-forest)_12%,transparent)] bg-[var(--color-surface-muted)] p-4 sm:grid-cols-2"
+      className="mb-6 grid gap-4 rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-ivory)_12%,transparent)] bg-[var(--color-surface-muted)] p-4 sm:grid-cols-2"
     >
       <SelectField
         label="Teren"
@@ -66,8 +66,10 @@ export function OwnerCreateBookingForm({ pitches, day, onDone }: Props) {
         onValueChange={setPitchId}
       />
       {free.length === 0 ? (
-        <p className="self-end text-sm text-[var(--color-forest-fill)]">
-          Nicio oră liberă pe terenul ales
+        <p className="self-end text-sm text-[var(--color-coral)]">
+          {openCount === 0
+            ? "Ziua e închisă pe terenul ales"
+            : "Toate orele sunt ocupate pe terenul ales"}
         </p>
       ) : (
         <SelectField

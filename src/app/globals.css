@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 @import "../styles/tokens.css";
 
 @theme inline {
@@ -10,7 +10,7 @@
   --color-on-forest: var(--color-on-forest);
   --color-on-coral: var(--color-on-coral);
   --color-surface-muted: var(--color-surface-muted);
-  --color-background: var(--color-ivory);
+  --color-background: var(--color-forest);
   --color-foreground: var(--color-ink);
   --font-sans: var(--font-body);
   --font-display: var(--font-display);
@@ -24,13 +24,13 @@
 
 html {
   min-width: var(--min-viewport);
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 body {
   margin: 0;
   min-height: 100%;
-  background: var(--color-ivory);
+  background: var(--color-forest);
   color: var(--color-ink);
   font-family: var(--font-body), "Segoe UI", sans-serif;
   font-size: var(--type-body);
@@ -46,8 +46,8 @@ h3,
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--color-coral) 55%, var(--color-ivory));
-  color: var(--color-forest);
+  background: color-mix(in srgb, var(--color-coral) 55%, var(--color-forest));
+  color: var(--color-ivory);
 }
 
 :focus-visible {
@@ -80,6 +80,138 @@ img {
   animation: crm-enter 420ms var(--ease-out) both;
 }
 
+@keyframes mingo-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mingo-hero-pan {
+  from {
+    transform: scale(1.08) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1) translate3d(0, -1.5%, 0);
+  }
+}
+
+.mingo-rise {
+  animation: mingo-rise 700ms var(--ease-out) both;
+}
+
+.mingo-rise-delay-1 {
+  animation-delay: 90ms;
+}
+
+.mingo-rise-delay-2 {
+  animation-delay: 170ms;
+}
+
+.mingo-rise-delay-3 {
+  animation-delay: 250ms;
+}
+
+.mingo-hero-pan {
+  animation: mingo-hero-pan 9s var(--ease-out) both;
+  will-change: transform;
+}
+
+/* Thin fade-in scrollbar: track transparent, thumb only while scrolling */
+.mingo-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 220ms var(--ease-out);
+}
+
+.mingo-scroll.is-scrolling {
+  scrollbar-color: color-mix(in srgb, var(--color-ivory) 38%, transparent)
+    transparent;
+}
+
+.mingo-scroll::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+.mingo-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mingo-scroll::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 999px;
+  transition: background-color 220ms var(--ease-out);
+}
+
+.mingo-scroll.is-scrolling::-webkit-scrollbar-thumb {
+  background-color: color-mix(in srgb, var(--color-ivory) 38%, transparent);
+}
+
+/* Mobile CRM tables → stacked cards (needs data-label on each td) */
+@media (max-width: 767px) {
+  .mingo-data-table {
+    min-width: 0 !important;
+  }
+
+  .mingo-data-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .mingo-data-table tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.75rem;
+  }
+
+  .mingo-data-table tr {
+    display: block;
+    border: 1px solid
+      color-mix(in srgb, var(--color-ivory) 12%, transparent) !important;
+    border-radius: var(--radius-md);
+    background: var(--color-surface-muted);
+    padding: 0.85rem 1rem;
+  }
+
+  .mingo-data-table td {
+    display: grid;
+    grid-template-columns: minmax(5.5rem, 34%) 1fr;
+    align-items: start;
+    gap: 0.5rem 0.75rem;
+    border: 0 !important;
+    padding: 0.35rem 0 !important;
+  }
+
+  .mingo-data-table td:last-child:not([data-label]),
+  .mingo-data-table td[data-label=""] {
+    grid-template-columns: 1fr;
+    justify-items: end;
+    padding-top: 0.65rem !important;
+  }
+
+  .mingo-data-table td[data-label]:not([data-label=""])::before {
+    content: attr(data-label);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    opacity: 0.62;
+    padding-top: 0.15rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -89,7 +221,9 @@ img {
     transition-duration: 0.01ms !important;
   }
 
-  .crm-enter {
+  .crm-enter,
+  .mingo-rise,
+  .mingo-hero-pan {
     animation: none;
   }
 }

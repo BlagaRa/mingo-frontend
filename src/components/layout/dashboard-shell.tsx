@@ -1,8 +1,8 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { ReactNode } from "react";
+import { useEffect, useId, useState, type ReactNode } from "react";
 import { appConfig } from "@/config/app";
 import { theme } from "@/config/theme";
 import { useDemoSession } from "@/lib/demo-session";
@@ -12,10 +12,8 @@ const ownerLinks = [
   { href: "/proprietar/terenuri", label: "Terenuri" },
   { href: "/proprietar/rezervari", label: "Rezervări" },
   { href: "/proprietar/disponibilitate", label: "Disponibilitate" },
-  { href: "/proprietar/calendar", label: "Calendar" },
   { href: "/proprietar/statistici", label: "Statistici" },
-  { href: "/proprietar/abonamente", label: "Abonamente" },
-  { href: "/proprietar/terenuri/nou", label: "Teren nou" },
+  { href: "/proprietar/abonamente", label: "Abonament" },
 ];
 
 const adminLinks = [
@@ -35,11 +33,38 @@ export function DashboardShell({
   const pathname = usePathname();
   const { setRole } = useDemoSession();
   const links = mode === "admin" ? adminLinks : ownerLinks;
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuId = useId();
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
 
   return (
     <div className="flex min-h-full flex-1">
+      {menuOpen ? (
+        <button
+          type="button"
+          aria-label="Închide meniul"
+          className="fixed inset-0 z-30 bg-[color-mix(in_srgb,var(--color-ivory)_45%,transparent)] md:hidden"
+          onClick={() => setMenuOpen(false)}
+        />
+      ) : null}
+
       <aside
-        className="sticky top-0 flex h-screen w-[15.5rem] shrink-0 flex-col border-r px-3 py-5"
+        id={menuId}
+        className={`fixed inset-y-0 left-0 z-40 flex h-screen w-[min(15.5rem,86vw)] shrink-0 flex-col border-r px-3 py-5 transition-transform duration-[var(--motion-hover-ms)] ease-[var(--ease-out)] md:sticky md:translate-x-0 ${
+          menuOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+        }`}
         style={{
           backgroundColor: theme.colors.forest,
           color: theme.colors.ivory,
@@ -93,14 +118,29 @@ export function DashboardShell({
           </Link>
         </div>
       </aside>
-      <div className="flex min-w-0 flex-1 flex-col bg-[var(--color-ivory)]">
-        <header className="flex items-center justify-between border-b border-[color-mix(in_srgb,var(--color-forest)_12%,transparent)] px-6 py-4">
-          <p className="text-sm font-medium text-[var(--color-forest)]">
-            {mode === "admin" ? "Consolă admin" : "Spațiu proprietar"}
-          </p>
+
+      <div className="flex min-w-0 flex-1 flex-col bg-[var(--color-forest)]">
+        <header className="flex items-center justify-between gap-3 border-b border-[color-mix(in_srgb,var(--color-ivory)_12%,transparent)] px-3 py-3 sm:px-4 sm:py-4">
+          <div className="flex min-w-0 items-center gap-2">
+            <button
+              type="button"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] border border-[color-mix(in_srgb,var(--color-ivory)_16%,transparent)] text-[var(--color-ivory)] md:hidden"
+              aria-expanded={menuOpen}
+              aria-controls={menuId}
+              aria-label={menuOpen ? "Închide meniul" : "Deschide meniul"}
+              onClick={() => setMenuOpen((open) => !open)}
+            >
+              <span aria-hidden="true" className="text-lg leading-none">
+                {menuOpen ? "×" : "☰"}
+              </span>
+            </button>
+            <p className="truncate text-sm font-medium text-[var(--color-ivory)]">
+              {mode === "admin" ? "Consolă admin" : "Spațiu proprietar"}
+            </p>
+          </div>
           <Link
             href="/"
-            className="text-sm font-medium text-[var(--color-forest-fill)] underline-offset-2 hover:underline"
+            className="shrink-0 text-sm font-medium text-[var(--color-coral)] underline-offset-2 hover:underline"
           >
             Revino pe Mingo
           </Link>

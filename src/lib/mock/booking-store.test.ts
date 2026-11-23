@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { bookings } from "./fixtures";
 import {
   confirmBooking,
+  freeBookableHoursForDay,
   getBooking,
   listBookings,
   resetBookingStore,
@@ -56,5 +57,21 @@ describe("booking store", () => {
   it("leaves non-pending bookings unchanged and ignores unknown ids", () => {
     expect(confirmBooking("b-4")?.status).toBe("cancelled");
     expect(confirmBooking("missing")).toBeUndefined();
+  });
+
+  it("offers only slots not held by an active booking", () => {
+    const ids = () =>
+      freeBookableHoursForDay("p-1", "2026-11-24").map((s) => s.id);
+    expect(ids()).toContain("s-2");
+    expect(ids()).not.toContain("s-1");
+    upsertBooking({ ...pendingBooking, id: "b-taken", slotId: "s-2" });
+    expect(ids()).not.toContain("s-2");
+    upsertBooking({
+      ...pendingBooking,
+      id: "b-1",
+      slotId: "s-1",
+      status: "cancelled",
+    });
+    expect(ids()).toContain("s-1");
   });
 });

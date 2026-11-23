@@ -1,5 +1,8 @@
 import type { Slot } from "./types";
-import { slots } from "./fixtures";
+import { listSlots } from "./slot-store";
+
+export { OWNER_START_HOURS, buildSlotRange } from "./hours";
+export { OWNER_START_HOURS as OWNER_HOURS } from "./hours";
 
 export type MonthCell = {
   key: string;
@@ -98,7 +101,7 @@ export function buildMonthCells(
 export function availableDays(pitchId: string): string[] {
   const days = [
     ...new Set(
-      slots
+      listSlots()
         .filter((slot) => slot.pitchId === pitchId)
         .map((slot) => slotDay(slot.startsAt)),
     ),
@@ -107,30 +110,12 @@ export function availableDays(pitchId: string): string[] {
 }
 
 export function freeHoursForDay(pitchId: string, day: string): Slot[] {
-  return slots
+  return listSlots()
     .filter(
       (slot) => slot.pitchId === pitchId && slotDay(slot.startsAt) === day,
     )
     .sort((a, b) => a.startsAt.localeCompare(b.startsAt));
 }
-
-/** Demo hour grid 08–22 used by owner availability UI */
-export const OWNER_HOURS = [
-  "08:00",
-  "09:00",
-  "10:00",
-  "11:00",
-  "12:00",
-  "13:00",
-  "14:00",
-  "15:00",
-  "16:00",
-  "17:00",
-  "18:00",
-  "19:00",
-  "20:00",
-  "21:00",
-] as const;
 
 export function hourKey(pitchId: string, day: string, hour: string): string {
   return `${pitchId}|${day}|${hour}`;

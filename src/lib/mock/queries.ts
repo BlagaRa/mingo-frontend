@@ -1,5 +1,10 @@
 import type { Booking, Pitch } from "./types";
 import { bookings, pitches, slots, users } from "./fixtures";
+import { isPitchVisible } from "./pitch-visibility-store";
+import {
+  getSlot as getStoredSlot,
+  slotsForPitch as storedSlotsForPitch,
+} from "./slot-store";
 
 export type PitchFilters = {
   judet?: string;
@@ -28,6 +33,7 @@ export function filterPitches(
   filters: PitchFilters,
 ): Pitch[] {
   return list.filter((pitch) => {
+    if (!isPitchVisible(pitch.id)) return false;
     if (filters.judet && pitch.judet !== filters.judet) return false;
     if (filters.oras && pitch.oras !== filters.oras) return false;
     if (filters.zona && pitch.zona !== filters.zona) return false;
@@ -123,7 +129,7 @@ export function getBooking(id: string) {
 }
 
 export function getSlot(id: string) {
-  return slots.find((slot) => slot.id === id);
+  return getStoredSlot(id) ?? slots.find((slot) => slot.id === id);
 }
 
 export function getUser(id: string) {
@@ -131,7 +137,7 @@ export function getUser(id: string) {
 }
 
 export function slotsForPitch(pitchId: string) {
-  return slots.filter((slot) => slot.pitchId === pitchId);
+  return storedSlotsForPitch(pitchId);
 }
 
 export function bookingsForPitch(pitchId: string) {
@@ -159,6 +165,7 @@ export function ownerBookingStats(ownerId: string) {
     cancelled: related.filter((b) => b.status === "cancelled").length,
     open: related.filter((b) => b.status === "open").length,
     full: related.filter((b) => b.status === "full").length,
+    pending: related.filter((b) => b.status === "pending").length,
     byPitch: ownerPitches(ownerId).map((pitch) => ({
       pitch,
       count: related.filter((b) => b.pitchId === pitch.id).length,

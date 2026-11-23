@@ -18,9 +18,9 @@ describe("StatusBadge", () => {
     expect(screen.getByTestId("status-icon-cancelled")).toBeInTheDocument();
   });
 
-  it("renders confirmed with a check icon", () => {
+  it("renders confirmed (încasată) with a check icon", () => {
     render(<StatusBadge status="confirmed" />);
-    expect(screen.getByText("Confirmată")).toBeInTheDocument();
+    expect(screen.getByText("Încasată")).toBeInTheDocument();
     expect(screen.getByTestId("status-icon-confirmed")).toBeInTheDocument();
   });
 
@@ -31,9 +31,9 @@ describe("StatusBadge", () => {
     expect(screen.getByTestId("status-icon-pending")).toBeInTheDocument();
   });
 
-  it("renders full with a distinct filled tone", () => {
+  it("renders full (locuri pline) with a distinct filled tone", () => {
     render(<StatusBadge status="full" />);
-    const badge = screen.getByText("Completă").closest("span");
+    const badge = screen.getByText("Locuri pline").closest("span");
     expect(badge).toHaveStyle({
       backgroundColor: theme.colors.forestFill,
       color: theme.colors.ivory,

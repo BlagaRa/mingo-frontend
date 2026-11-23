@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { CrmPagination } from "@/components/crm/crm-pagination";
 import { CrmToolbar } from "@/components/crm/crm-toolbar";
 import { DataTable } from "@/components/crm/data-table";
@@ -46,9 +46,9 @@ export default async function AdminTerenuriPage({
               return (
                 <tr
                   key={pitch.id}
-                  className="border-t border-[color-mix(in_srgb,var(--color-forest)_10%,transparent)]"
+                  className="border-t border-[color-mix(in_srgb,var(--color-ivory)_10%,transparent)]"
                 >
-                  <td className="px-4 py-3 font-medium">
+                  <td data-label="Teren" className="px-4 py-3 font-medium">
                     <Link
                       href={`/terenuri/${pitch.id}`}
                       className="underline-offset-2 hover:underline"
@@ -56,14 +56,18 @@ export default async function AdminTerenuriPage({
                       {pitch.name}
                     </Link>
                   </td>
-                  <td className="px-4 py-3">
+                  <td data-label="Locație" className="px-4 py-3">
                     {pitch.oras}, {pitch.zona}
                   </td>
-                  <td className="px-4 py-3">{owner?.name ?? pitch.ownerId}</td>
-                  <td className="px-4 py-3 tabular-nums">
+                  <td data-label="Proprietar" className="px-4 py-3">
+                    {owner?.name ?? pitch.ownerId}
+                  </td>
+                  <td data-label="Preț" className="px-4 py-3 tabular-nums">
                     {formatRon(pitch.pricePerHourRon)}
                   </td>
-                  <td className="px-4 py-3 tabular-nums">{pitch.capacity}</td>
+                  <td data-label="Capacitate" className="px-4 py-3 tabular-nums">
+                    {pitch.capacity}
+                  </td>
                 </tr>
               );
             })}

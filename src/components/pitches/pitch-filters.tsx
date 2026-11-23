@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useState, type ReactNode } from "react";
@@ -23,11 +23,13 @@ function FilterChip({
       aria-pressed={active}
       className="rounded-[var(--radius-sm)] px-3.5 py-2 text-sm font-semibold transition-[transform,background-color,color,box-shadow] duration-[var(--motion-press-ms)] ease-[var(--ease-out)] active:scale-[0.97]"
       style={{
-        backgroundColor: active ? theme.colors.coral : theme.colors.ivory,
-        color: theme.colors.forest,
+        backgroundColor: active
+          ? theme.colors.coral
+          : theme.colors.surfaceMuted,
+        color: active ? theme.colors.onCoral : theme.colors.ivory,
         boxShadow: active
           ? "none"
-          : "inset 0 0 0 1px color-mix(in srgb, #073035 14%, transparent)",
+          : "inset 0 0 0 1px color-mix(in srgb, #F7F5ED 14%, transparent)",
       }}
     >
       {label}
@@ -44,7 +46,7 @@ function FilterRow({
 }) {
   return (
     <div className="grid gap-3 sm:grid-cols-[7.5rem_minmax(0,1fr)] sm:items-center">
-      <p className="text-sm font-medium text-[var(--color-forest)]">{label}</p>
+      <p className="text-sm font-medium text-[var(--color-ivory)]">{label}</p>
       <div className="flex flex-wrap gap-2">{children}</div>
     </div>
   );
@@ -109,17 +111,17 @@ export function PitchFilters() {
   return (
     <section
       aria-label="Filtre terenuri"
-      className="w-full border-b border-[color-mix(in_srgb,var(--color-forest)_12%,transparent)] pb-8"
+      className="w-full border-b border-[color-mix(in_srgb,var(--color-ivory)_12%,transparent)] pb-8"
     >
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
-        <h2 className="font-display text-2xl font-semibold tracking-tight text-[var(--color-forest)]">
+        <h2 className="font-display text-2xl font-semibold tracking-tight text-[var(--color-ivory)]">
           Filtre
         </h2>
         {hasFilters ? (
           <button
             type="button"
             onClick={() => router.replace("/terenuri", { scroll: false })}
-            className="text-sm font-semibold text-[var(--color-forest)] underline underline-offset-4 transition-opacity duration-[var(--motion-press-ms)] ease-[var(--ease-out)] [@media(hover:hover)_and_(pointer:fine)]:hover:opacity-70"
+            className="text-sm font-semibold text-[var(--color-ivory)] underline underline-offset-4 transition-opacity duration-[var(--motion-press-ms)] ease-[var(--ease-out)] [@media(hover:hover)_and_(pointer:fine)]:hover:opacity-70"
           >
             Resetează
           </button>
@@ -178,14 +180,14 @@ export function PitchFilters() {
           type="button"
           aria-expanded={moreOpen}
           onClick={() => setMoreOpen((current) => !current)}
-          className="inline-flex items-center gap-2 rounded-[var(--radius-sm)] px-3 py-2 text-sm font-semibold text-[var(--color-forest)] transition-[transform,background-color] duration-[var(--motion-press-ms)] ease-[var(--ease-out)] active:scale-[0.97]"
+          className="inline-flex items-center gap-2 rounded-[var(--radius-sm)] px-3 py-2 text-sm font-semibold text-[var(--color-ivory)] transition-[transform,background-color] duration-[var(--motion-press-ms)] ease-[var(--ease-out)] active:scale-[0.97]"
           style={{
             backgroundColor: moreOpen
               ? theme.colors.surfaceMuted
               : "transparent",
             boxShadow: moreOpen
               ? "none"
-              : "inset 0 0 0 1px color-mix(in srgb, #073035 12%, transparent)",
+              : "inset 0 0 0 1px color-mix(in srgb, #F7F5ED 14%, transparent)",
           }}
         >
           Mai multe filtre
@@ -194,7 +196,7 @@ export function PitchFilters() {
               className="rounded-full px-1.5 py-0.5 text-[0.7rem] font-bold tabular-nums"
               style={{
                 backgroundColor: theme.colors.coral,
-                color: theme.colors.forest,
+                color: theme.colors.onCoral,
               }}
             >
               {advancedCount}

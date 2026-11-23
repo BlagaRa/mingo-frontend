@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { FormEvent, useState } from "react";
 import { PageShell } from "@/components/layout/page-shell";
@@ -20,7 +20,7 @@ export default function ContactPage() {
     >
       <form
         onSubmit={onSubmit}
-        className="mx-auto grid w-full max-w-lg gap-4 rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-forest)_14%,transparent)] bg-[var(--color-coral-soft)]/40 p-5"
+        className="mx-auto grid w-full max-w-lg gap-4 rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-ivory)_14%,transparent)] bg-[var(--color-coral-soft)]/40 p-5"
       >
         <Input label="Nume" name="name" required autoComplete="name" />
         <Input
@@ -37,7 +37,7 @@ export default function ContactPage() {
             name="message"
             required
             rows={4}
-            className="rounded-[var(--radius-sm)] border border-[color-mix(in_srgb,var(--color-forest)_22%,transparent)] bg-[var(--color-ivory)] px-3 py-2"
+            className="rounded-[var(--radius-sm)] border border-[color-mix(in_srgb,var(--color-ivory)_22%,transparent)] bg-[var(--color-surface-muted)] px-3 py-2"
           />
         </label>
         <Button type="submit" variant="accent">

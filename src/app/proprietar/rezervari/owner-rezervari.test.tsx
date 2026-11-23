@@ -1,33 +1,30 @@
-﻿import { render, screen } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
-
-const searchParamsState = { value: "" };
-
-vi.mock("next/navigation", () => ({
-  useSearchParams: () => new URLSearchParams(searchParamsState.value),
-  usePathname: () => "/proprietar/rezervari",
-  useRouter: () => ({ replace: vi.fn(), push: vi.fn() }),
-}));
-
+import { render, screen } from "@testing-library/react";
+import { beforeEach, describe, expect, it } from "vitest";
+import { resetBookingStore } from "@/lib/mock/booking-store";
+import { resetProgramStore } from "@/lib/mock/program-store";
+import { resetSlotStore } from "@/lib/mock/slot-store";
 import OwnerRezervariPage from "./page";
 
 describe("OwnerRezervariPage", () => {
   beforeEach(() => {
-    searchParamsState.value = "";
+    resetProgramStore();
+    resetSlotStore();
+    resetBookingStore();
   });
 
-  it("filters by status from the URL", () => {
-    searchParamsState.value = "status=cancelled";
+  it("shows month calendar heading and pitch filter", () => {
     render(<OwnerRezervariPage />);
-    expect(screen.getAllByText("Anulată").length).toBeGreaterThan(0);
-    expect(screen.queryByTestId("status-icon-open")).toBeNull();
+    expect(
+      screen.getByRole("heading", { name: "Rezervări" }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("combobox", { name: "Teren" })).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /noiembrie 2026/i }),
+    ).toBeInTheDocument();
   });
 
-  it("shows empty state when filters match nothing", () => {
-    searchParamsState.value = "q=zzzz-inexistent";
+  it("lists bookings for the selected day", () => {
     render(<OwnerRezervariPage />);
-    expect(screen.getByRole("status")).toHaveTextContent(
-      "Nicio rezervare pe filtrele astea",
-    );
+    expect(screen.getAllByTestId("day-booking").length).toBeGreaterThan(0);
   });
 });

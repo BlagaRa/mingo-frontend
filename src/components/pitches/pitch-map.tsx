@@ -1,4 +1,4 @@
-type PitchMapProps = {
+﻿type PitchMapProps = {
   lat: number;
   lng: number;
   name: string;
@@ -15,9 +15,9 @@ export function PitchMap({ lat, lng, name }: PitchMapProps) {
   const src = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat}%2C${lng}`;
 
   return (
-    <section className="overflow-hidden rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-forest)_14%,transparent)]">
-      <div className="border-b border-[color-mix(in_srgb,var(--color-forest)_10%,transparent)] bg-[var(--color-surface-muted)] px-4 py-3">
-        <h2 className="font-display text-[var(--type-h3)] font-semibold text-[var(--color-forest)]">
+    <section className="overflow-hidden rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-ivory)_14%,transparent)]">
+      <div className="border-b border-[color-mix(in_srgb,var(--color-ivory)_10%,transparent)] bg-[var(--color-surface-muted)] px-4 py-3">
+        <h2 className="font-display text-[var(--type-h3)] font-semibold text-[var(--color-ivory)]">
           Hartă
         </h2>
         <p className="text-[var(--type-small)] opacity-80">{name}</p>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 import { theme } from "@/config/theme";
@@ -69,12 +69,12 @@ export function ActionMenu({ label = "Acțiuni", items }: ActionMenuProps) {
         aria-controls={menuId}
         onClick={() => setOpen((current) => !current)}
         onKeyDown={onTriggerKeyDown}
-        className="inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] border border-[color-mix(in_srgb,var(--color-forest)_16%,transparent)] bg-[var(--color-ivory)] text-lg leading-none text-[var(--color-forest)] shadow-[0_1px_2px_color-mix(in_srgb,var(--color-forest)_6%,transparent)] transition-[border-color,box-shadow,transform] duration-[var(--motion-press-ms)] ease-[var(--ease-out)] active:scale-[0.97] [@media(hover:hover)_and_(pointer:fine)]:hover:border-[var(--color-coral)]"
+        className="inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius-sm)] border border-[color-mix(in_srgb,var(--color-ivory)_16%,transparent)] bg-[var(--color-surface-muted)] text-lg leading-none text-[var(--color-ivory)] shadow-[0_1px_2px_color-mix(in_srgb,var(--color-ivory)_6%,transparent)] transition-[border-color,box-shadow,transform] duration-[var(--motion-press-ms)] ease-[var(--ease-out)] active:scale-[0.97] [@media(hover:hover)_and_(pointer:fine)]:hover:border-[var(--color-coral)]"
         style={{
           borderColor: open ? theme.colors.coral : undefined,
         }}
       >
-        <span aria-hidden>⋯</span>
+        <span aria-hidden>⋮</span>
       </button>
 
       {open ? (
@@ -84,7 +84,7 @@ export function ActionMenu({ label = "Acțiuni", items }: ActionMenuProps) {
           aria-label={label}
           tabIndex={-1}
           onKeyDown={onMenuKeyDown}
-          className="absolute right-0 top-[calc(100%+0.35rem)] z-30 min-w-[10.5rem] overflow-hidden rounded-[var(--radius-sm)] border border-[color-mix(in_srgb,var(--color-forest)_14%,transparent)] bg-[var(--color-ivory)] py-1 shadow-[0_12px_28px_color-mix(in_srgb,var(--color-forest)_14%,transparent)]"
+          className="absolute right-0 top-[calc(100%+0.35rem)] z-30 min-w-[10.5rem] overflow-hidden rounded-[var(--radius-sm)] border border-[color-mix(in_srgb,var(--color-ivory)_14%,transparent)] bg-[var(--color-surface-muted)] py-1 shadow-[0_12px_28px_color-mix(in_srgb,var(--color-ivory)_14%,transparent)]"
         >
           {items.map((item) => (
             <button
@@ -94,7 +94,7 @@ export function ActionMenu({ label = "Acțiuni", items }: ActionMenuProps) {
               onClick={() => select(item)}
               className="flex w-full px-3.5 py-2.5 text-left text-[0.95rem] font-medium transition-colors duration-[var(--motion-press-ms)] ease-[var(--ease-out)]"
               style={{
-                color: item.danger ? theme.colors.coral : theme.colors.forest,
+                color: item.danger ? theme.colors.coral : theme.colors.ivory,
               }}
               onMouseEnter={(event) => {
                 event.currentTarget.style.backgroundColor = item.danger

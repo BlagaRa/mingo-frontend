@@ -423,6 +423,12 @@ const curatedSlots: Slot[] = [
     startsAt: "2026-12-05T21:00:00+02:00",
     endsAt: "2026-12-05T22:00:00+02:00",
   },
+  {
+    id: "s-19",
+    pitchId: "p-8",
+    startsAt: "2026-12-08T20:00:00+02:00",
+    endsAt: "2026-12-08T21:00:00+02:00",
+  },
 ];
 
 const generatedSlots = [
@@ -657,5 +663,17 @@ export const bookings: Booking[] = [
     contactName: "Andrei Pop",
     contactEmail: "andrei@example.com",
     contactPhone: "0721123456",
+  },
+  {
+    id: "b-17",
+    pitchId: "p-8",
+    slotId: "s-19",
+    hostId: "u-player-8",
+    playerIds: ["u-player-8"],
+    status: "pending",
+    seatsNeeded: 10,
+    contactName: "Cristian Neagu",
+    contactEmail: "cristian@example.com",
+    contactPhone: "0728890123",
   },
 ];

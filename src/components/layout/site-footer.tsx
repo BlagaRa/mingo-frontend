@@ -14,19 +14,22 @@ export function SiteFooter() {
     <footer
       className="mt-auto border-t"
       style={{
-        backgroundColor: theme.colors.forest,
-        color: theme.colors.ivory,
-        borderColor: "transparent",
+        backgroundColor: theme.colors.ivory,
+        color: theme.colors.forest,
+        borderColor: "color-mix(in srgb, #073035 10%, transparent)",
       }}
     >
-      <div className="mx-auto grid w-full max-w-[var(--content-max)] gap-10 px-[var(--page-gutter)] py-12 md:grid-cols-[1.2fr_1fr_1fr]">
+      <div className="mx-auto grid w-full max-w-[var(--content-max)] gap-10 px-[var(--page-gutter)] py-14 md:grid-cols-[1.35fr_1fr_1fr]">
         <div>
-          <p className="font-display text-2xl font-semibold tracking-tight">
+          <p className="font-display text-3xl font-semibold tracking-tight">
             {appConfig.name}
           </p>
-          <p className="mt-3 max-w-[28ch] text-sm opacity-80">
+          <p className="mt-3 max-w-[30ch] text-sm opacity-75">
             Terenuri de fotbal, rezervări curate — pentru jucători și proprietari.
           </p>
+          <Button asChild variant="accent" className="mt-6">
+            <Link href="/rezervari/nou">Rezervă acum</Link>
+          </Button>
         </div>
         <div>
           <p className="text-sm font-semibold" style={{ color: theme.colors.coral }}>
@@ -82,7 +85,12 @@ export function SiteFooter() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-[color-mix(in_srgb,#F7F5ED_14%,transparent)] px-[var(--page-gutter)] py-4 text-center text-xs opacity-70">
+      <div
+        className="px-[var(--page-gutter)] py-4 text-center text-xs opacity-65"
+        style={{
+          borderTop: "1px solid color-mix(in srgb, #073035 10%, transparent)",
+        }}
+      >
         © 2026 {appConfig.name}. Demo frontend · poze Unsplash.
       </div>
       <Dialog

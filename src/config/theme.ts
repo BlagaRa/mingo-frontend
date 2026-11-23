@@ -1,4 +1,4 @@
-/** Brand ink — deep forest for text */
+/** Brand ink — deep forest for base / dark surfaces */
 const forest = "#073035";
 /** Visible forest for fills so buttons do not read as black */
 const forestFill = "#1B6B5A";
@@ -17,17 +17,19 @@ export const theme = {
     forest,
     forestFill,
     coral,
-    ink: forest,
+    /** Body / primary text on forest base */
+    ink: ivory,
     onForest: ivory,
+    /** Dark label on coral key buttons */
     onCoral: forest,
-    /** Warm ivory mute — never mint; stays in forest/ivory/coral family */
-    surfaceMuted: "#EDE9DF",
-    coralSoft: "#FFE4D8",
+    /** Elevated panel on forest — slightly lifted teal */
+    surfaceMuted: "#0E4A51",
+    /** Coral wash readable on dark base */
+    coralSoft: "#5C342E",
     /** Soft amber for open / pending bookings */
     statusOpen: "#F1E6A8",
     /** Coral-red wash for cancelled bookings */
     statusDanger: "#FFB4A3",
-
   },
 
   radii: {
@@ -43,7 +45,7 @@ export const theme = {
   },
   motion: {
     pressMs: 160,
-    hoverMs: 200,
+    hoverMs: 320,
     easeOut: "cubic-bezier(0.23, 1, 0.32, 1)",
   },
   minViewportPx: readMinViewport(),

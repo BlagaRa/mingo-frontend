@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -49,7 +49,7 @@ function InregistrareForm() {
     >
       <form
         onSubmit={onSubmit}
-        className="mx-auto flex w-full max-w-md flex-col gap-4 rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-forest)_14%,transparent)] p-5"
+        className="mx-auto flex w-full max-w-md flex-col gap-4 rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-ivory)_14%,transparent)] p-5"
       >
         {selectedPlan ? (
           <p className="rounded-[var(--radius-sm)] border border-[color-mix(in_srgb,var(--color-coral)_40%,transparent)] bg-[var(--color-coral-soft)] px-3 py-2 text-sm">

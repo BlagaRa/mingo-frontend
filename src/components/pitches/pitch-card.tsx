@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import type { Pitch } from "@/lib/mock/types";
@@ -9,7 +9,7 @@ import { PhotoCarousel } from "@/components/pitches/photo-carousel";
 
 export function PitchCard({ pitch }: { pitch: Pitch }) {
   return (
-    <article className="flex flex-col overflow-hidden rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-forest)_14%,transparent)] bg-[var(--color-ivory)] shadow-[0_10px_24px_color-mix(in_srgb,var(--color-forest)_8%,transparent)] transition-[transform,box-shadow] duration-[var(--motion-press-ms)] ease-[var(--ease-out)] [@media(hover:hover)_and_(pointer:fine)]:hover:-translate-y-1 [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-[0_16px_32px_color-mix(in_srgb,var(--color-forest)_14%,transparent)]">
+    <article className="flex flex-col overflow-hidden rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-ivory)_14%,transparent)] bg-[var(--color-surface-muted)] shadow-[0_10px_24px_color-mix(in_srgb,var(--color-ivory)_8%,transparent)] transition-[transform,box-shadow] duration-[var(--motion-hover-ms)] ease-[var(--ease-out)] [@media(hover:hover)_and_(pointer:fine)]:hover:-translate-y-0.5 [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-[0_14px_28px_color-mix(in_srgb,var(--color-ivory)_12%,transparent)]">
       <div className="relative">
         <PhotoCarousel photos={pitch.photos} alt={pitch.name} />
         <span
@@ -25,14 +25,14 @@ export function PitchCard({ pitch }: { pitch: Pitch }) {
 
       <div className="flex flex-1 flex-col gap-3 p-4">
         <div>
-          <h2 className="font-display text-xl font-semibold tracking-tight text-[var(--color-forest)]">
+          <h2 className="font-display text-xl font-semibold tracking-tight text-[var(--color-ivory)]">
             <Link href={`/terenuri/${pitch.id}`}>{pitch.name}</Link>
           </h2>
-          <p className="mt-1 text-sm text-[var(--color-forest-fill)]">
+          <p className="mt-1 text-sm text-[var(--color-coral)]">
             {pitch.oras} · {pitch.zona}
           </p>
         </div>
-        <p className="text-sm font-semibold text-[var(--color-forest)]">
+        <p className="text-sm font-semibold text-[var(--color-ivory)]">
           {formatRon(pitch.pricePerHourRon)}
           <span className="font-medium opacity-70"> / oră</span>
         </p>

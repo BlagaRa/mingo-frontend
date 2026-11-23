@@ -49,8 +49,8 @@ describe("booking display", () => {
 
   it("labels statuses in Romanian", () => {
     expect(bookingStatusLabel("open")).toBe("Deschisă");
-    expect(bookingStatusLabel("full")).toBe("Completă");
-    expect(bookingStatusLabel("confirmed")).toBe("Confirmată");
+    expect(bookingStatusLabel("full")).toBe("Locuri pline");
+    expect(bookingStatusLabel("confirmed")).toBe("Încasată");
     expect(bookingStatusLabel("cancelled")).toBe("Anulată");
     expect(bookingStatusLabel("pending")).toBe("Neconfirmată");
   });
@@ -62,7 +62,7 @@ describe("booking display", () => {
   it("uses a coral-soft tone for pending, distinct from cancelled and confirmed", () => {
     const pending = bookingStatusTone("pending");
     expect(pending.backgroundColor).toBe(theme.colors.coralSoft);
-    expect(pending.color).toBe(theme.colors.forest);
+    expect(pending.color).toBe(theme.colors.ivory);
     expect(pending.backgroundColor).not.toBe(
       bookingStatusTone("cancelled").backgroundColor,
     );
@@ -92,7 +92,7 @@ describe("booking display", () => {
     expect(full.backgroundColor).toBe(theme.colors.forestFill);
     expect(full.color).toBe(theme.colors.ivory);
     expect(confirmed.backgroundColor).toBe(theme.colors.surfaceMuted);
-    expect(confirmed.color).toBe(theme.colors.forest);
+    expect(confirmed.color).toBe(theme.colors.ivory);
   });
 
   it("filters bookings by status and pitch", () => {

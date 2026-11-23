@@ -9,13 +9,13 @@ import "./globals.css";
 
 const display = Fraunces({
   variable: "--font-display",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   weight: ["500", "600", "700"],
 });
 
 const body = Manrope({
   variable: "--font-body",
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600", "700"],
 });
 
@@ -57,7 +57,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         } as CSSProperties
       }
     >
-      <body className="flex min-h-full flex-col bg-[var(--color-ivory)] font-[family-name:var(--font-body)] text-[var(--color-ink)]">
+      <body className="flex min-h-full flex-col bg-[var(--color-forest)] font-[family-name:var(--font-body)] text-[var(--color-ink)]">
         <DemoSessionProvider>
           <a
             href="#continut"

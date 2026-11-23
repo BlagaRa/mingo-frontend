@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+﻿import type { ReactNode } from "react";
 import { theme } from "@/config/theme";
 
 type FeedbackProps = {
@@ -22,11 +22,11 @@ export function EmptyState({
         backgroundColor: theme.colors.surfaceMuted,
       }}
     >
-      <p className="font-display text-xl font-semibold tracking-tight text-[var(--color-forest)] sm:text-2xl">
+      <p className="font-display text-xl font-semibold tracking-tight text-[var(--color-ivory)] sm:text-2xl">
         {title}
       </p>
       {description ? (
-        <p className="mx-auto mt-3 max-w-[36ch] text-[var(--type-body)] text-[var(--color-forest-fill)]">
+        <p className="mx-auto mt-3 max-w-[36ch] text-[var(--type-body)] text-[var(--color-coral)]">
           {description}
         </p>
       ) : null}
@@ -49,11 +49,11 @@ export function ErrorState({
         backgroundColor: theme.colors.coralSoft,
       }}
     >
-      <p className="font-display text-xl font-semibold tracking-tight text-[var(--color-forest)] sm:text-2xl">
+      <p className="font-display text-xl font-semibold tracking-tight text-[var(--color-ivory)] sm:text-2xl">
         {title}
       </p>
       {description ? (
-        <p className="mx-auto mt-3 max-w-[36ch] text-[var(--type-body)] text-[var(--color-forest)]">
+        <p className="mx-auto mt-3 max-w-[36ch] text-[var(--type-body)] text-[var(--color-ivory)]">
           {description}
         </p>
       ) : null}
@@ -106,7 +106,7 @@ export function CardSkeleton({ count = 3 }: { count?: number }) {
       {Array.from({ length: count }, (_, index) => (
         <div
           key={index}
-          className="overflow-hidden rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-forest)_12%,transparent)] bg-[var(--color-ivory)]"
+          className="overflow-hidden rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-ivory)_12%,transparent)] bg-[var(--color-surface-muted)]"
         >
           <div
             className="aspect-[16/10] animate-pulse"
@@ -138,7 +138,7 @@ export function TableSkeleton({ rows = 4 }: { rows?: number }) {
       role="status"
       aria-label="Se încarcă rezervările"
       aria-busy="true"
-      className="overflow-hidden rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-forest)_12%,transparent)]"
+      className="overflow-hidden rounded-[var(--radius-md)] border border-[color-mix(in_srgb,var(--color-ivory)_12%,transparent)]"
     >
       <span className="sr-only">Se încarcă rezervările</span>
       <div
@@ -148,10 +148,12 @@ export function TableSkeleton({ rows = 4 }: { rows?: number }) {
       {Array.from({ length: rows }, (_, index) => (
         <div
           key={index}
-          className="h-14 animate-pulse border-t border-[color-mix(in_srgb,var(--color-forest)_8%,transparent)]"
+          className="h-14 animate-pulse border-t border-[color-mix(in_srgb,var(--color-ivory)_8%,transparent)]"
           style={{
             backgroundColor:
-              index % 2 === 0 ? theme.colors.ivory : theme.colors.surfaceMuted,
+              index % 2 === 0
+                ? "color-mix(in srgb, var(--color-ivory) 8%, transparent)"
+                : theme.colors.surfaceMuted,
           }}
         />
       ))}

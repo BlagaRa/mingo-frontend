@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { CrmPagination } from "@/components/crm/crm-pagination";
 import { CrmToolbar } from "@/components/crm/crm-toolbar";
 import { DataTable } from "@/components/crm/data-table";
@@ -27,8 +27,8 @@ export default async function ProprietarTerenuriPage({
       title="Terenurile mele"
       description="Poze, locație și prețuri pe fiecare teren."
       actions={
-        <Button asChild variant="accent">
-          <Link href="/proprietar/terenuri/nou">Teren nou</Link>
+        <Button asChild variant="accent" className="whitespace-nowrap">
+          <Link href="/proprietar/terenuri/nou">Adaugă teren</Link>
         </Button>
       }
     >
@@ -47,6 +47,7 @@ export default async function ProprietarTerenuriPage({
           <CrmToolbar
             resultCount={result.total}
             searchDefault={filters.q ?? ""}
+            searchLabel="Caută teren"
             action="/proprietar/terenuri"
           />
           <DataTable
@@ -63,17 +64,21 @@ export default async function ProprietarTerenuriPage({
               : result.items.map((pitch) => (
                   <tr
                     key={pitch.id}
-                    className="border-t border-[color-mix(in_srgb,var(--color-forest)_10%,transparent)]"
+                    className="border-t border-[color-mix(in_srgb,var(--color-ivory)_10%,transparent)]"
                   >
-                    <td className="px-4 py-3 font-medium">{pitch.name}</td>
-                    <td className="px-4 py-3">
+                    <td data-label="Teren" className="px-4 py-3 font-medium">
+                      {pitch.name}
+                    </td>
+                    <td data-label="Locație" className="px-4 py-3">
                       {pitch.oras} · {pitch.zona}
                     </td>
-                    <td className="px-4 py-3 tabular-nums">
+                    <td data-label="Preț" className="px-4 py-3 tabular-nums">
                       {formatRon(pitch.pricePerHourRon)}
                     </td>
-                    <td className="px-4 py-3 tabular-nums">{pitch.capacity}</td>
-                    <td className="px-4 py-3 text-right">
+                    <td data-label="Capacitate" className="px-4 py-3 tabular-nums">
+                      {pitch.capacity}
+                    </td>
+                    <td data-label="" className="px-4 py-3 text-right">
                       <Button asChild variant="ghost">
                         <Link href={`/proprietar/terenuri/${pitch.id}`}>
                           Editează

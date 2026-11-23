@@ -1,4 +1,4 @@
-import { theme } from "@/config/theme";
+﻿import { theme } from "@/config/theme";
 
 export type ChartDatum = { label: string; value: number };
 
@@ -21,7 +21,7 @@ export function BarChart({
       aria-label={title}
       className="space-y-3"
     >
-      <p className="text-sm font-semibold text-[var(--color-forest)]">{title}</p>
+      <p className="text-sm font-semibold text-[var(--color-ivory)]">{title}</p>
       <ul className="space-y-3">
         {data.map((row) => (
           <li key={row.label}>

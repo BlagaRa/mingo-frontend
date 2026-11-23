@@ -13,14 +13,14 @@ describe("Button", () => {
     });
   });
 
-  it("renders a green forest fill with ivory label, not black on black", () => {
+  it("renders coral primary key buttons with forest label", () => {
     render(<Button variant="primary">Intră</Button>);
     const button = screen.getByRole("button", { name: "Intră" });
     expect(button).toHaveStyle({
-      backgroundColor: theme.colors.forestFill,
-      color: theme.colors.onForest,
+      backgroundColor: theme.colors.coral,
+      color: theme.colors.onCoral,
     });
-    expect(theme.colors.onForest).toBe(theme.colors.ivory);
+    expect(theme.colors.onCoral).toBe(theme.colors.forest);
   });
 
   it("can render as a child link", () => {
