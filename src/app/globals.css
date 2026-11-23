@@ -1,0 +1,95 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+@theme inline {
+  --color-ivory: var(--color-ivory);
+  --color-forest: var(--color-forest);
+  --color-forest-fill: var(--color-forest-fill);
+  --color-coral: var(--color-coral);
+  --color-ink: var(--color-ink);
+  --color-on-forest: var(--color-on-forest);
+  --color-on-coral: var(--color-on-coral);
+  --color-surface-muted: var(--color-surface-muted);
+  --color-background: var(--color-ivory);
+  --color-foreground: var(--color-ink);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: var(--min-viewport);
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  font-family: var(--font-body), "Segoe UI", sans-serif;
+  font-size: var(--type-body);
+  line-height: 1.55;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-coral) 55%, var(--color-ivory));
+  color: var(--color-forest);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-coral);
+  outline-offset: 2px;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes crm-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.crm-enter {
+  animation: crm-enter 420ms var(--ease-out) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .crm-enter {
+    animation: none;
+  }
+}

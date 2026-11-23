@@ -1,0 +1,36 @@
+---
+description: Always read and follow the project design, implementation, and testing skills
+alwaysApply: true
+---
+
+# Project skills are mandatory
+
+Before editing, read the matching skill from disk and follow it. Do not rely on memory.
+
+Superpowers, every task: read `.agents/skills/using-superpowers/SKILL.md` first, then the skill it names. All live in `.agents/skills/`:
+
+- New behavior: `brainstorming`, then `writing-plans` when the work has several steps.
+- Implement a plan: `using-git-worktrees`, then `subagent-driven-development` or `executing-plans`.
+- Bug or failing test: `systematic-debugging`.
+- Several independent tasks: `dispatching-parallel-agents`.
+- Done: `requesting-code-review`, then `finishing-a-development-branch` when integrating.
+- Review feedback: `receiving-code-review`.
+- A skill misfired: `diagnosing-superpowers`. Authoring a skill: `writing-skills`.
+
+User instructions override these skills.
+
+Implementation, any code change:
+
+- `.agents/skills/ponytail/SKILL.md` — smallest complete change.
+- `.agents/skills/test-driven-development/SKILL.md` — failing test first, then the code that makes it pass.
+- `.agents/skills/test-every-line/SKILL.md` — trebuie un test pentru fiecare linie de cod adăugată. This overrides ponytail when ponytail would skip a test.
+- `.agents/skills/verification-before-completion/SKILL.md` — run the tests and read the output before claiming the work is done.
+
+UI, CSS, components, pages, motion, or copy:
+
+- `.agents/skills/emil-design-eng/SKILL.md` — interaction and motion. Skip its "Initial Response" greeting when the user already gave a task.
+- `.agents/skills/impeccable/SKILL.md` — craft and product UI. Read its setup and craft floor before editing.
+- `.agents/skills/design-taste-frontend/SKILL.md` — landing pages and visual worlds.
+- `.agents/skills/web-design-guidelines/SKILL.md` plus `references/command.md` — review the UI you touched before finishing.
+
+When they disagree: web-design-guidelines is the accessibility floor, emil-design-eng decides motion, impeccable decides product UI, design-taste-frontend decides marketing pages, ponytail decides how little code, test-driven-development decides the order (test first), test-every-line decides that every new production line is executed by a test.
