@@ -134,7 +134,7 @@ export function PhotoCarousel({
             type="button"
             aria-label="Poza anterioară"
             onClick={() => go(-1)}
-            className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded-full px-3 py-2 text-sm font-semibold transition-transform duration-[var(--motion-press-ms)] ease-[var(--ease-out)] active:scale-[0.97]"
+            className="absolute left-3 top-1/2 z-30 -translate-y-1/2 rounded-full px-3 py-2 text-sm font-semibold transition-transform duration-[var(--motion-press-ms)] ease-[var(--ease-out)] active:scale-[0.97]"
             style={{
               backgroundColor: theme.colors.ivory,
               color: theme.colors.forest,
@@ -146,7 +146,7 @@ export function PhotoCarousel({
             type="button"
             aria-label="Poza următoare"
             onClick={() => go(1)}
-            className="absolute right-3 top-1/2 z-10 -translate-y-1/2 rounded-full px-3 py-2 text-sm font-semibold transition-transform duration-[var(--motion-press-ms)] ease-[var(--ease-out)] active:scale-[0.97]"
+            className="absolute right-3 top-1/2 z-30 -translate-y-1/2 rounded-full px-3 py-2 text-sm font-semibold transition-transform duration-[var(--motion-press-ms)] ease-[var(--ease-out)] active:scale-[0.97]"
             style={{
               backgroundColor: theme.colors.ivory,
               color: theme.colors.forest,
@@ -154,7 +154,7 @@ export function PhotoCarousel({
           >
             ›
           </button>
-          <div className="absolute bottom-3 left-0 right-0 z-10 flex justify-center gap-2">
+          <div className="absolute bottom-3 left-0 right-0 z-30 flex justify-center gap-2">
             {safe.map((_, dot) => (
               <button
                 key={dot}

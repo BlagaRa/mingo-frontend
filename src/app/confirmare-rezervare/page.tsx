@@ -31,7 +31,7 @@ function ConfirmForm() {
   return (
     <PageShell
       title="Confirmă rezervarea"
-      description={`Am trimis un cod către ${email}. Introdu-l mai jos pentru a confirma rezervarea.`}
+      description={`Ți-am trimis un cod pe ${email}. Introdu-l mai jos ca să validezi rezervarea.`}
     >
       <form
         onSubmit={onSubmit}
@@ -48,7 +48,7 @@ function ConfirmForm() {
           error={error}
         />
         <Button type="submit" variant="accent">
-          Confirmă
+          Confirmă rezervarea
         </Button>
         <Button
           type="button"

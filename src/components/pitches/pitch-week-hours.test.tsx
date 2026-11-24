@@ -47,11 +47,11 @@ describe("PitchWeekHours", () => {
       "aria-pressed",
       "true",
     );
-    expect(screen.getByRole("link", { name: "18:00" })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: "Rezervă 18:00" })).toHaveAttribute(
       "href",
       "/rezervari/nou?pitchId=p-1&slotId=s-today",
     );
-    expect(screen.queryByRole("link", { name: "17:00" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: "Rezervă 17:00" })).not.toBeInTheDocument();
   });
 
   it("switches hours when another available day is selected", async () => {
@@ -63,8 +63,8 @@ describe("PitchWeekHours", () => {
       />,
     );
     await user.click(screen.getByRole("button", { name: "Alege 2026-11-26" }));
-    expect(screen.getByRole("link", { name: "17:00" })).toBeInTheDocument();
-    expect(screen.queryByRole("link", { name: "18:00" })).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Rezervă 17:00" })).toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: "Rezervă 18:00" })).not.toBeInTheDocument();
   });
 
   it("falls back to the first available day when today has no slots", () => {
@@ -78,6 +78,6 @@ describe("PitchWeekHours", () => {
       "aria-pressed",
       "true",
     );
-    expect(screen.getByRole("link", { name: "17:00" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Rezervă 17:00" })).toBeInTheDocument();
   });
 });

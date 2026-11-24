@@ -6,6 +6,8 @@ type FeedbackProps = {
   description?: string;
   action?: ReactNode;
   className?: string;
+  /** dark = on forest pages; light = inside ivory cards/panels */
+  tone?: "dark" | "light";
 };
 
 export function EmptyState({
@@ -13,20 +15,37 @@ export function EmptyState({
   description,
   action,
   className = "",
+  tone = "dark",
 }: FeedbackProps) {
+  const light = tone === "light";
   return (
     <div
       role="status"
-      className={`rounded-[var(--radius-md)] px-6 py-10 text-center sm:px-10 sm:py-12 ${className}`}
+      className={`rounded-[var(--radius-md)] px-5 py-8 text-center sm:px-8 sm:py-10 ${className}`}
       style={{
-        backgroundColor: theme.colors.surfaceMuted,
+        backgroundColor: light
+          ? "color-mix(in srgb, var(--color-forest-fill) 10%, var(--color-ivory))"
+          : theme.colors.surfaceMuted,
+        boxShadow: light
+          ? "inset 0 0 0 1px color-mix(in srgb, var(--color-forest-fill) 18%, transparent)"
+          : undefined,
       }}
     >
-      <p className="font-display text-xl font-semibold tracking-tight text-[var(--color-ivory)] sm:text-2xl">
+      <p
+        className="font-display text-xl font-semibold tracking-tight sm:text-2xl"
+        style={{ color: light ? theme.colors.forest : theme.colors.ivory }}
+      >
         {title}
       </p>
       {description ? (
-        <p className="mx-auto mt-3 max-w-[36ch] text-[var(--type-body)] text-[var(--color-coral)]">
+        <p
+          className="mx-auto mt-3 max-w-[36ch]"
+          style={{
+            fontSize: theme.type.body,
+            color: light ? theme.colors.forest : theme.colors.coral,
+            opacity: light ? 0.72 : 1,
+          }}
+        >
           {description}
         </p>
       ) : null}

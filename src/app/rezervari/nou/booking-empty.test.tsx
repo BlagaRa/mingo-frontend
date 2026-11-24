@@ -31,8 +31,9 @@ describe("RezervareNouaPage empty hours", () => {
   it("shows an empty state when the selected day has no free hours", async () => {
     const user = userEvent.setup();
     render(<RezervareNouaPage />);
-    expect(await screen.findByText("Alege o zi")).toBeInTheDocument();
-    await user.click(screen.getByRole("button", { name: "Alege 2026-11-24" }));
+    await user.click(
+      await screen.findByRole("button", { name: "Alege 2026-11-24" }),
+    );
     expect(await screen.findByText("Nicio oră liberă")).toBeInTheDocument();
   });
 });

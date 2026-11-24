@@ -2,6 +2,10 @@ import { describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { pitches } from "@/lib/mock/queries";
 
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ push: vi.fn() }),
+}));
+
 vi.mock("@/lib/mock/schedule", async (importOriginal) => {
   const actual = await importOriginal<typeof import("@/lib/mock/schedule")>();
   return {

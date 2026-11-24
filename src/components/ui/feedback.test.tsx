@@ -22,6 +22,19 @@ describe("feedback states", () => {
     expect(screen.getByRole("button", { name: "Alege altă zi" })).toBeInTheDocument();
   });
 
+  it("renders a light empty state readable on ivory panels", () => {
+    render(
+      <EmptyState
+        tone="light"
+        title="Nicio echipă deschisă"
+        description="Când cineva rezervă și lasă locuri libere, apar aici."
+      />,
+    );
+    const status = screen.getByRole("status");
+    expect(status).toHaveTextContent("Nicio echipă deschisă");
+    expect(status).toHaveTextContent(/locuri libere/);
+  });
+
   it("renders an error state focused on recovery", () => {
     render(
       <ErrorState

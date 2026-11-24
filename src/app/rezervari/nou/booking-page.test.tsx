@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 vi.mock("next/navigation", () => ({
   useRouter: () => ({ push: vi.fn() }),
@@ -21,14 +22,22 @@ describe("RezervareNouaPage", () => {
     );
   });
 
-  it("shows an empty state until a day is chosen", async () => {
+  it("keeps the calendar visible when hours appear after picking a day", async () => {
+    const user = userEvent.setup();
     render(<RezervareNouaPage />);
-    expect(await screen.findByText("Alege o zi")).toBeInTheDocument();
     expect(
-      screen.getByText(
-        "Zilele libere apar evidențiate în calendar. Cele inactive nu au ore.",
-      ),
+      await screen.findByRole("button", { name: "Alege 2026-11-24" }),
     ).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /19:00/ })).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "Alege 2026-11-24" }));
+    expect(
+      await screen.findByRole("button", { name: "19:00–20:00" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: "Alege 2026-11-24" }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("list", { name: "Progres" })).toBeInTheDocument();
   });
 });
 

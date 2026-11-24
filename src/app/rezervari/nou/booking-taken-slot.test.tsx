@@ -27,8 +27,10 @@ describe("RezervareNouaPage taken slots", () => {
     await user.click(
       await screen.findByRole("button", { name: "Alege 2026-11-24" }),
     );
-    expect(screen.getByRole("button", { name: "19:00" })).toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: "18:00" })).toBeNull();
+    expect(
+      await screen.findByRole("button", { name: "19:00–20:00" }),
+    ).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "18:00–19:00" })).toBeNull();
   });
 
   it("says the hours are taken when every open slot of the day is booked", async () => {
@@ -39,8 +41,8 @@ describe("RezervareNouaPage taken slots", () => {
     await user.click(
       await screen.findByRole("button", { name: "Alege 2026-11-24" }),
     );
-    expect(screen.getByText("Nicio oră liberă")).toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: "20:00" })).toBeNull();
-    expect(screen.getByRole("button", { name: "Confirmă" })).toBeDisabled();
+    expect(await screen.findByText("Nicio oră liberă")).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /20:00/ })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Pasul următor" })).toBeNull();
   });
 });

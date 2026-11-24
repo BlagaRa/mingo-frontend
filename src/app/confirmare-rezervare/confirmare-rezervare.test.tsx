@@ -38,7 +38,9 @@ describe("ConfirmareRezervarePage", () => {
   it("confirms the booking with any 6-char code and navigates to it", async () => {
     render(<ConfirmareRezervarePage />);
     await userEvent.type(screen.getByLabelText("Cod din email"), "abc123");
-    await userEvent.click(screen.getByRole("button", { name: "Confirmă" }));
+    await userEvent.click(
+      screen.getByRole("button", { name: "Confirmă rezervarea" }),
+    );
     expect(confirmBooking).toHaveBeenCalledWith("b-1");
     expect(push).toHaveBeenCalledWith("/rezervari/b-1");
   });
@@ -46,7 +48,9 @@ describe("ConfirmareRezervarePage", () => {
   it("rejects a code that is not 6 chars", async () => {
     render(<ConfirmareRezervarePage />);
     await userEvent.type(screen.getByLabelText("Cod din email"), "abc");
-    await userEvent.click(screen.getByRole("button", { name: "Confirmă" }));
+    await userEvent.click(
+      screen.getByRole("button", { name: "Confirmă rezervarea" }),
+    );
     expect(confirmBooking).not.toHaveBeenCalled();
     expect(push).not.toHaveBeenCalled();
     expect(screen.getByText(/Codul are 6 caractere/)).toBeInTheDocument();

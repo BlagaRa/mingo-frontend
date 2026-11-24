@@ -13,10 +13,7 @@ import RezervareNouaPage from "./page";
 
 async function pickDayAndHour(user: ReturnType<typeof userEvent.setup>) {
   await user.click(await screen.findByRole("button", { name: "Alege 2026-11-24" }));
-  const hour = screen
-    .getAllByRole("button")
-    .find((button) => /^\d{2}:\d{2}$/.test(button.textContent ?? ""));
-  await user.click(hour!);
+  await user.click(await screen.findByRole("button", { name: "19:00–20:00" }));
 }
 
 async function fillContact(
@@ -40,7 +37,7 @@ describe("RezervareNouaPage contact fields", () => {
     render(<RezervareNouaPage />);
     await pickDayAndHour(user);
     await fillContact(user, "0612345678");
-    await user.click(screen.getByRole("button", { name: "Confirmă" }));
+    await user.click(screen.getByRole("button", { name: "Rezervă" }));
 
     expect(screen.getByText("Introdu un telefon valid (07…)")).toBeInTheDocument();
     expect(push).not.toHaveBeenCalled();
@@ -53,7 +50,7 @@ describe("RezervareNouaPage contact fields", () => {
     render(<RezervareNouaPage />);
     await pickDayAndHour(user);
     await fillContact(user, "0712 345 678");
-    await user.click(screen.getByRole("button", { name: "Confirmă" }));
+    await user.click(screen.getByRole("button", { name: "Rezervă" }));
 
     const created = listBookings().slice(before);
     expect(created).toHaveLength(1);
